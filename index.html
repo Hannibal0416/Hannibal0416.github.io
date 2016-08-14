@@ -105,6 +105,7 @@
 	.test:hover {
 		-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,1), rgba(0, 0, 0,1));
 	}
+	/*
 	@media screen and (min-width: 480px) {
 
 		.test[title=A1] {
@@ -116,7 +117,7 @@
 		.test[title=A3] {
 			max-width:100%;max-height:30%;
 		}
-	}
+	}*/
 	
 	</style>
 
@@ -134,9 +135,10 @@
 				verticalCentered: false,
 
 				//to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
-				css3:false
+				css3:true
 			});
 		});
+		
 	</script>
 
 </head>
