@@ -75,7 +75,8 @@
  	/*Adding background for the slides
 	* --------------------------------------- */
 	#slide1{
-		background-image: url(http://1.bp.blogspot.com/--RTYQ0nTTuA/VBpMS5q6scI/AAAAAAAACGA/rU64HjNh3To/s1600/%E6%A1%8C%E5%B8%83-00045.jpg);
+		background-color:#03030a;
+		background-image: url(img/A1.png);
 		padding: 6% 0 0 0;
 	}
 	#slide2{
@@ -135,7 +136,41 @@
 				verticalCentered: false,
 
 				//to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
-				css3:true
+				css3:true,
+				onLeave: function(index, nextIndex, direction){
+			    	if(deleteLog){
+			    		$('#callbacksDiv').html('');
+			    	}
+			    	$('#callbacksDiv').append('<p>onLeave - index:' + index + ' nextIndex:' + nextIndex + ' direction:' + direction + '</p>')
+					console.log("onLeave--" + "index: " + index + " nextIndex: " + nextIndex + " direction: " +  direction);
+			    },
+			    onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+			    	if(deleteLog){
+			    		$('#callbacksDiv').html('');
+			    	}
+			    	$('#callbacksDiv').append('<p>onSlideLeave - anchorLink:' + anchorLink + " index:" + index + " slideIndex:" + slideIndex +" direction:" + direction + " nextSlideIndex:" + nextSlideIndex + '</p>');
+					console.log("onSlideLeave--" + "anchorLink: " + anchorLink + " index: " + index + " slideIndex: " + slideIndex + " direction: " + direction);
+			    },
+			    afterRender: function(){
+			    	$('#callbacksDiv').append('<p>afterRender</p>');
+			    	console.log("afterRender");
+			    },
+			    afterResize: function(){
+			    	$('#callbacksDiv').append('<p>afterResize</p>');
+			    	console.log("afterResize");
+			    },
+			    afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+			    	$('#callbacksDiv').append('<p>afterSlideLoad - anchorLink:' + anchorLink + " index:" + index + " slideAnchor:" + slideAnchor +" slideIndex:" + slideIndex + '</p>');
+			    	deleteLog = true;
+			    	console.log("afterSlideLoad--" + "anchorLink: " + anchorLink + " index: " + index + " slideAnchor: " + slideAnchor + " slideIndex: " + slideIndex);
+					console.log("----------------");
+			    },
+			    afterLoad: function(anchorLink, index){
+			    	$('#callbacksDiv').append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+					deleteLog = true;
+					console.log('===============');
+					console.log("afterLoad--" + "anchorLink: " + anchorLink + " index: " + index );
+			    }
 			});
 		});
 		
@@ -148,15 +183,12 @@
 <div id="fullpage">
 	<div class="section " id="section0">
 		<h1>冷氣外掛方案</h1>
-		<!--<img alt="Mona Lisa" src="img/A3.png" title="A3" class="test" style="max-width:30%;max-height:100%;">
-		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" style="max-width:20%;max-height:50%;">
-		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" style="max-width:20%;max-height:100%;">-->
 		<img alt="Mona Lisa" src="img/A3.png" title="A3" class="test" />
 		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" />
 		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" />
 	</div>
 	<div class="section" id="section1">
-	    <div class="slide" id="slide1"><h1>Slide Backgrounds</h1></div>
+	    <div class="slide" id="slide1"><h1>A1外掛位置</h1></div>
 	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>
 	</div>
 	<div class="section" id="section2"><h1>Lovely images <br />for a lovely page</h1></div>
