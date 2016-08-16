@@ -150,7 +150,7 @@
 			$('#fullpage').fullpage({
 				verticalCentered: false,
 				sectionsColor: ['#000000', '#1BBC9B', '#7E8F7C','#C63D0F'],
-				anchors: ['firstPage', 'secondPage', '3rdPage'],
+				//anchors: ['firstPage', 'secondPage', '3rdPage'],
 				navigation: true,
 				navigationPosition: 'right',
 				navigationTooltips: ['First page', 'Second page', 'Third and last page'],
@@ -220,12 +220,12 @@
 
 </head>
 <body>
-
+<!--
 <ul id="menu">
 	<li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
 	<li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
 	<li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
-</ul>
+</ul>-->
 <div id="fullpage">
 	<div class="section " id="section0">
 		<h1>冷氣外掛方案</h1>
@@ -233,13 +233,13 @@
 		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" />
 		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" />-->
 		<div class="row">
-		  <div class="col-xs-12 col-sm-12 col-md-4"><img alt="A3" src="img/A3.png" title="A3" class="test" /></div>
-		  <div class="col-xs-12 col-sm-12 col-md-4"><img alt="A2" src="img/A2.png" title="A2" class="test" /></div>
+		  <div class="col-xs-12 col-sm-4 col-md-4"><img alt="A3" src="img/A3.png" title="A3" class="test" /></div>
+		  <div class="col-xs-12 col-sm-4 col-md-4"><img alt="A2" src="img/A2.png" title="A2" class="test" /></div>
 
 		  <!-- Add the extra clearfix for only the required viewport -->
 		  
 
-		  <div class="col-xs-12 col-sm-12 col-md-4"><img alt="A1" src="img/A1.png" title="A1" class="test" /></div>
+		  <div class="col-xs-12 col-sm-4 col-md-4"><img alt="A1" src="img/A1.png" title="A1" class="test" /></div>
 
 		   <!-- <div class="clearfix visible-xs-block">12</div>-->
 		</div>
@@ -247,7 +247,7 @@
 	<div class="section" id="section1">
 	    <div class="slide" id="slide1">
 			<h1>A1外掛位置</h1>
-			<img alt="Mona Lisa" src="img/A1.png" title="A1" class="showA1" />
+			<img alt="Mona Lisa" src="img/A1.png" class="showA1" />
 		</div>
 	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>
 	</div>
