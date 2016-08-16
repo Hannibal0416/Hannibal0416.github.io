@@ -8,6 +8,7 @@
 	<meta name="description" content="fullPage fixed full-screen backgrounds." />
 	<meta name="keywords"  content="fullpage,jquery,demo,screen,fixed,fullscreen,backgrounds,full-screen" />
 	<meta name="Resource-type" content="Document" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
 
 
 
@@ -31,7 +32,7 @@
 	/* Style for our header texts
 	* --------------------------------------- */
 	h1{
-		font-size: 5em;
+		font-size: 3em;
 		font-family: arial,helvetica;
 		color: #fff;
 		margin:0;
@@ -105,22 +106,22 @@
 	}
 	
 	.test[title=A1] {
-		max-width:100%;max-height:auto;
+		max-width:90%;max-height:100%;
 	}
 	.test[title=A2] {
-		max-width:100%;max-height:auto;
+		max-width:90%;max-height:100%;
 	}
 	.test[title=A3] {
-		max-width:100%;max-height:auto;
+		max-width:90%;max-height:100%;
 	}
 	
 	
-	@media only screen and (min-width: 750px) {
+	@media screen and (min-width: 100px) and (max-width: 768px) {
 		.test[title=A1] {
-			max-width:30%;max-height:50%;
+			max-width:30%;max-height:40%;
 		}
 		.test[title=A2] {
-			max-width:30%;max-height:20%;
+			max-width:30%;max-height:30%;
 		}
 		.test[title=A3] {
 			max-width:40%;max-height:30%;
