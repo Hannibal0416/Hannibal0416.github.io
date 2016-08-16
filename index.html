@@ -215,6 +215,10 @@
 			    }
 			});
 		});
+		$(window).resize(function() {
+		    $('h1')[0].innerHTML= "H:" + screen.height + ",W:"+ screen.width;
+		});
+		
 		
 	</script>
 
@@ -229,6 +233,7 @@
 <div id="fullpage">
 	<div class="section " id="section0">
 		<h1>冷氣外掛方案</h1>
+		<h2></h2>
 		<!--<img alt="Mona Lisa" src="img/A3.png" title="A3" class="test" />
 		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" />
 		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" />-->
