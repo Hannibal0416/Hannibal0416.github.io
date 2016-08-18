@@ -38,6 +38,13 @@
 		margin:0;
 		padding:0;
 	}
+	h2{
+		font-size: 1em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+		padding:0;
+	}
 
 	/* Centered texts in each section
 	* --------------------------------------- */
@@ -64,19 +71,19 @@
 	}*/
 	#section0{
 		background-color:#03030a;
-		padding: 8% 0 0 0;
+		padding: 3% 0 0 0;
 	}
 	#section1{
 		background-color:#03030a;
-		padding: 8% 0 0 0;
+		padding: 3% 0 0 0;
 	}
 	#section2{
 		background-image: url(http://1.bp.blogspot.com/-QosPjMFXPj0/VBpMR6VTSdI/AAAAAAAACFw/maa3CcPIEMk/s1600/%E6%A1%8C%E5%B8%83-00043.jpg);
-		padding: 8% 0 0 0;
+		padding: 3% 0 0 0;
 	}
 	#section3{
 		background-image: url(http://2.bp.blogspot.com/-Cfq7ftXh6DQ/VBpMSUU6zvI/AAAAAAAACF4/XsaPb2p7BPM/s1600/%E6%A1%8C%E5%B8%83-00044.jpg);
-		padding: 8% 0 0 0;
+		padding: 3% 0 0 0;
 	}
 	#section3 h1{
 		color: #000;
@@ -109,32 +116,139 @@
 	}
 	
 	.test[title=A1] {
-		max-width:90%;max-height:100%;
+		width:90%;height:100%;
 	}
 	.test[title=A2] {
-		max-width:90%;max-height:100%;
+		width:90%;height:100%;
 	}
 	.test[title=A3] {
-		max-width:90%;max-height:100%;
+		width:90%;height:100%;
 	}
-	.showA1 {
-		max-width:90%;max-height:90%;
+	
+	.pic {
+	  border: 5px solid #fff;  
+	  float: center;
+	  width:90%;
+	  height:70%;
+	  margin: 5%;
+	  overflow: hidden;
+	  
+	  -webkit-box-shadow: 5px 5px 5px #111;
+			  box-shadow: 5px 5px 5px #111;  
+	}
+	
+	.showA1{
+		width:40%;
+		height:100%;
+		-webkit-transition:  all 1s ease ;
+		-moz-transition: all 1s ease;
+		-o-transition: all 1s ease;
+		-ms-transition: all 1s ease;
+		transition: all 1s ease;
+	}
+	.showA1:hover {
+		width:100%;
+		height:300%;
+		margin-top: -90%;
+	}
+
+	
+	@-webkit-keyframes rotate /* Safari and Chrome */ {
+	  from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	  }
+	  to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	  }
+	}
+	@keyframes rotate {
+	  from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	  }
+	  to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	  }
+	}
+	
+	.fan_div {
+		border: 1px solid #000;  
+		float: center;
+		width:30px;
+		height:30px;
+		margin: 5%;
+		overflow: hidden;
+		-webkit-transition: 0.5s ease-in-out;
+		-moz-transition: 0.5s ease-in-out;
+		-o-transition: 0.5s ease-in-out;
+		transition: 0.5s ease-in-out;
+	}
+	.fan_div:hover {
+		-webkit-transform: translate(0,100%);
+		-moz-transform: translate(0,100%);
+		-o-transform: translate(0,100%);
+		-ms-transform: translate(0,100%);
+		transform: translate(0,100%);
+	}
+	
+	.fan{
+		width:100%;
+		height:100%;
+		-webkit-animation: rotate 0.5s linear infinite;
+		-moz-animation: rotate 0.5s linear infinite;
+		-ms-animation: rotate 0.5s linear infinite;
+		-o-animation: rotate 0.5s linear infinite;
+		animation: rotate 0.5s linear infinite;
 	}
 	
 	
 	@media screen and (min-width: 100px) and (max-width: 540px) {
 		.test[title=A1] {
-			max-width:30%;max-height:40%;
+			width:30%;
+			height:40%;
 		}
 		.test[title=A2] {
-			max-width:30%;max-height:30%;
+			width:30%;
+			height:30%;
 		}
 		.test[title=A3] {
-			max-width:40%;max-height:30%;
+			width:40%;
+			height:30%;
 		}
-		
+		.showA1{
+			width:100%;
+			height:100%;
+		}
+		.showA1:hover {
+			width:130%;
+			height:130%;
+			max-width:130%;
+			max-height:130%;
+			margin-top: -80%;
+			margin-left: -10%;
+			-webkit-transition: rotate(180deg);
+			-moz-transition: rotate(180deg);
+			-o-transition: rotate(180deg);
+			-ms-transition: rotate(180deg);
+			transition: rotate(180deg);
+		}
 	}
-	
+
 	</style>
 
 	<!--[if IE]>
@@ -186,8 +300,16 @@
 			    },
 			    afterLoad: function(anchorLink, index){
 					if(index == 2){
+						
+/*
+						$('#fan1').delay(500).queue(function(next){
+							$(this).addClass("fan1_hover");
+						});
+						$('#showA1').delay(1000).queue(function(next){
+							$(this).addClass("showA1_after");
+						});
 						//moving the image
-						/*$('#section1').find('img').delay(500).animate({
+						$('#section1').find('img').delay(500).animate({
 							left: '0%'
 						}, 1500, 'easeOutExpo');
 
@@ -246,11 +368,22 @@
 		</div>
 	</div>
 	<div class="section" id="section1">
-	    <div class="slide" id="slide1">
-			<h1>A1外掛位置</h1>
-			<img alt="Mona Lisa" src="img/A1.png" title="A1" class="showA1" />
+		<!--<h1>A1外掛位置</h1>
+			
+		<div class="pic">
+			<img alt="A1" src="img/A1.png" id="showA1" class="showA1"  />
+		</div>-->
+		<div class="fan_div" id="fan1" >
+			<img alt="Fan1" src="img/fan.png" class="fan" />
 		</div>
-	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>
+		<div class="fan_div" id="fan2">
+			<img alt="Fan2" src="img/fan.png"  class="fan"  />
+		</div>
+		
+	    <!--<div class="slide" id="slide1">
+			
+		</div>
+	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>-->
 	</div>
 	<div class="section" id="section2"><h1>Lovely images <br />for a lovely page</h1></div>
 	<div class="section" id="section3"><h1>One Image = One thousand words</h1></div>
