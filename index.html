@@ -28,7 +28,7 @@
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
 	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
-	
+	<script type="text/javascript" src="js/three.js"></script>
 	<style>
 
 	/* Style for our header texts
@@ -420,9 +420,84 @@
 					});
 				
 			});
+
+
+
+			var scene, camera, renderer;
+
+			var WIDTH  = $('#showA1Div').width();
+			var HEIGHT = $('#showA1Div').height();
+			var SPEED = 0.01;
+			var mesh = null;
+			function init() {
+			    scene = new THREE.Scene();
+			    WIDTH  = $('#showA1Div').width();
+			    HEIGHT = $('#showA1Div').height();
+			    mesh = null;
+			    initMesh();
+			    initCamera();
+			    initLights();
+			    initRenderer();
+			    $('#showA1Div').empty();
+			    $('#showA1Div').append(renderer.domElement);
+			}
+
+			function initCamera() {
+			    camera = new THREE.PerspectiveCamera(70, WIDTH / HEIGHT, 1, 10);
+			    camera.position.set(0, 3.5, 5);
+			    camera.lookAt(scene.position);
+			}
+
+
+			function initRenderer() {
+			    renderer = new THREE.WebGLRenderer({ antialias: true });
+			    renderer.setSize(WIDTH, HEIGHT);
+			}
+
+			function initLights() {
+			    var light = new THREE.AmbientLight(0xffffff);
+			    scene.add(light);
+			}
+
 			
+			function initMesh() {
+			    var loader = new THREE.JSONLoader();
+			    loader.load('json/A1.json', function(geometry, materials) {
+			        mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+			        mesh.translation = THREE.GeometryUtils.center(geometry);
+			        scene.add(mesh);
+			    });
+			}
+
+			function rotateMesh() {
+			    if (!mesh) {
+			        return;
+			    }
+
+			    mesh.rotation.x -= SPEED * 2;
+			    mesh.rotation.y -= SPEED;
+			    mesh.rotation.z -= SPEED * 3;
+			}
+
+			function render() {
+			    requestAnimationFrame(render);
+			    rotateMesh();
+			    renderer.render(scene, camera);
+			}
+
+			init();
+			render();
+
+			$(window).on('resize', function(){
+		    	init();
+				requestAnimationFrame(render);
+				renderer.render(scene, camera);
+			});
 			
 		});
+
+		
 		
 		
 		
@@ -461,14 +536,18 @@ http://www.emanueleferonato.com/2014/12/10/html5-webgl-360-degrees-panorama-view
 	<div class="section" id="section1">
 		<h1>A1外掛位置</h1>
 			
-		<div class="pic">
-			<img alt="A1" src="img/A1.png" id="showA1" class="showA1"  />
+		<div class="pic" id="showA1Div">
+		
+
+		
+
+			<!--<img alt="A1" src="img/A1.png" id="showA1" class="showA1"  />
 			<div class="fan_div" id="fan1" >
 				<img alt="Fan1" src="img/fan.png" class="fan" />
 			</div>
 			<div class="fan_div" id="fan2">
 				<img alt="Fan2" src="img/fan.png"  class="fan"  />
-			</div>
+			</div>-->
 			
 		</div>
 		
