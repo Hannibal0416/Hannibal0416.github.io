@@ -29,6 +29,9 @@
 	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
 	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
 	<script type="text/javascript" src="js/three.js"></script>
+	<script type="text/javascript" src="js/OrbitControls.js"></script>
+	<script type="text/javascript" src="js/Detector.js"></script>
+	<script type="text/javascript" src="js/stats.min.js"></script>
 	<style>
 
 	/* Style for our header texts
@@ -423,23 +426,70 @@
 
 
 
-			var scene, camera, renderer;
+		
 
 			var WIDTH  = $('#showA1Div').width();
 			var HEIGHT = $('#showA1Div').height();
-			var SPEED = 0.01;
-			var mesh = null;
+			var stats;
+			var camera, controls, scene, renderer;
+			init();
+			animate();
+
+
 			function init() {
 			    scene = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x03030a, 0.002 );
 			    WIDTH  = $('#showA1Div').width();
 			    HEIGHT = $('#showA1Div').height();
-			    mesh = null;
+
+			    
+
 			    initMesh();
 			    initCamera();
 			    initLights();
 			    initRenderer();
-			    $('#showA1Div').empty();
-			    $('#showA1Div').append(renderer.domElement);
+
+			    //$('#showA1Div').empty();
+			    var container = document.getElementById( 'showA1Div' );
+				container.appendChild( renderer.domElement );
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+				controls.enableDamping = true;
+				controls.dampingFactor = 0.25;
+				controls.enableZoom = true;
+
+
+			    stats = new Stats();
+				container.appendChild( stats.dom );
+			    window.addEventListener( 'resize', onWindowResize, true );
+			    
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
+
+				stats.update();
+
+				render();
+
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
 			}
 
 			function initCamera() {
@@ -450,16 +500,26 @@
 
 
 			function initRenderer() {
-			    renderer = new THREE.WebGLRenderer({ antialias: true });
-			    renderer.setSize(WIDTH, HEIGHT);
+			    renderer = new THREE.WebGLRenderer();
+				renderer.setClearColor( scene.fog.color );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( WIDTH, HEIGHT );
 			}
 
 			function initLights() {
 			     //var light = new THREE.AmbientLight(0xffffff);
-			    var light = new THREE.PointLight( 0xffffff, 1.0, 0.0 );
-			    var light2 = new THREE.SpotLight( 0xffff00, 1.0, 0.0, 180, 10 );
-			    scene.add(light);
-			    scene.add(light2);
+			    light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 1, 1, 1 );
+				scene.add( light );
+
+				light = new THREE.DirectionalLight( 0x111111 );
+				light.position.set( -1, -1, -1 );
+				scene.add( light );
+
+				light = new THREE.AmbientLight( 0x222222 );
+				scene.add( light );
+				light = new THREE.SpotLight( 0xffffff, 0.5, 0.0, 180, 20 );
+				scene.add( light );
 			}
 
 			
@@ -473,31 +533,7 @@
 			    });
 			}
 
-			function rotateMesh() {
-			    if (!mesh) {
-			        return;
-			    }
 
-			    mesh.rotation.x -= SPEED * 2;
-			    mesh.rotation.y -= SPEED;
-			    mesh.rotation.z -= SPEED * 3;
-			}
-
-			function render() {
-			    requestAnimationFrame(render);
-			    rotateMesh();
-			    renderer.render(scene, camera);
-			}
-
-			init();
-			render();
-
-			$(window).on('resize', function(){
-		    	init();
-				requestAnimationFrame(render);
-				renderer.render(scene, camera);
-			});
-			
 		});
 
 		
