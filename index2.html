@@ -3,9 +3,9 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>美境冷氣外掛方案</title>
+	<title>Fixed fullscreen backgrounds - fullPage.js</title>
 	<meta name="author" content="Alvaro Trigo Lopez" />
-	<meta name="description" content="美境冷氣外掛方案" />
+	<meta name="description" content="fullPage fixed full-screen backgrounds." />
 	<meta name="keywords"  content="fullpage,jquery,demo,screen,fixed,fullscreen,backgrounds,full-screen" />
 	<meta name="Resource-type" content="Document" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -17,20 +17,16 @@
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
 	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" />
-	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
 	
 	
 	<!-- Latest compiled and minified CSS 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
 <!-- Latest compiled and minified JavaScript 
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/jquery-3.1.0.js"></script>-->
-	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-	
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+	<script type="text/javascript" src="js/jquery-3.1.0.js"></script>
 	<script type="text/javascript" src="js/jquery-ui-1.12.0.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox-thumbs.js"></script>
 	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
 	<script type="text/javascript" src="js/three.js"></script>
 	<script type="text/javascript" src="js/OrbitControls.js"></script>
@@ -41,7 +37,7 @@
 	/* Style for our header texts
 	* --------------------------------------- */
 	h1{
-		font-size: 2em;
+		font-size: 3em;
 		font-family: arial,helvetica;
 		color: #fff;
 		margin:0;
@@ -138,14 +134,14 @@
 	  border: 5px solid #fff;  
 	  float: center;
 	  width:90%;
-	  height:80%;
-	  margin: 3%;
+	  height:70%;
+	  margin: 5%;
 	  overflow: hidden;
 	  
 	  -webkit-box-shadow: 5px 5px 5px #111;
 			  box-shadow: 5px 5px 5px #111;  
 	}
-	/*
+	
 	.showA1{
 		width:40%;
 		height:100%;
@@ -155,7 +151,6 @@
 		-ms-transition: all 1s ease;
 		transition: all 1s ease;
 	}
-	
 	.showA1:hover {
 		width:100%;
 		height:300%;
@@ -163,7 +158,7 @@
 	}
 
 	
-	@-webkit-keyframes rotate {
+	@-webkit-keyframes rotate /* Safari and Chrome */ {
 	  from {
 		-ms-transform: rotate(0deg);
 		-moz-transform: rotate(0deg);
@@ -197,7 +192,7 @@
 	  }
 	}
 	
-	@-webkit-keyframes fanMove1  {
+	@-webkit-keyframes fanMove1 /* Safari and Chrome */ {
 	  from {
 		top:0%;
 		left:0%
@@ -218,7 +213,7 @@
 	  }
 	}
 	
-	@-webkit-keyframes fanMove2  {
+	@-webkit-keyframes fanMove2 /* Safari and Chrome */ {
 	  from {
 		top:0%;
 		left:0%
@@ -277,7 +272,7 @@
 		-o-animation: rotate 0.5s linear infinite;
 		animation: rotate 0.5s linear infinite;
 	}
-	*/
+	
 	
 	@media screen and (min-width: 100px) and (max-width: 540px) {
 		.test[title=A1] {
@@ -295,11 +290,7 @@
 		.fan_div {
 			width:10%;
 		}
-		.pic {
-
-			height:90%;
-
-		}
+		
 		
 		.showA1{
 			width:100%;
@@ -322,17 +313,24 @@
 	
 	</style>
 
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+	
+
 
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#fullpage').fullpage({
 				verticalCentered: false,
 				sectionsColor: ['#000000', '#1BBC9B', '#7E8F7C','#C63D0F'],
-				anchors: ['美境冷氣外掛方案', 'A1外掛位置', 'A2外掛位置'],
+				anchors: ['firstPage', 'secondPage', '3rdPage'],
 				navigation: true,
 				navigationPosition: 'right',
-				navigationTooltips: ['美境外掛方案', 'A1外掛位置', 'A2外掛位置'],
-
+				navigationTooltips: ['First page', 'Second page', 'Third and last page'],
+				//to avoid problems with css3 transforms and fixed elements in Chrome, as detailed here: https://github.com/alvarotrigo/fullPage.js/issues/208
 				css3:true,
 				onLeave: function(index, nextIndex, direction){
 			    	if(deleteLog){
@@ -363,62 +361,9 @@
 					console.log("----------------");
 			    },
 			    afterLoad: function(anchorLink, index){
-
-
-
 					if(index == 2){
-						/*
-
-						$.fancybox.open([
-							{
-								href : 'img/A1.png',
-								title : '使用教學'
-							}, {
-								href : 'img/A1.png',
-								title : '使用教學'
-							}, {
-								href : 'img/A1.png',
-								title : '使用教學'
-							}
-						],{
-							padding: 0,
-
-							openEffect : 'elastic',
-							openSpeed  : 150,
-
-							closeEffect : 'elastic',
-							closeSpeed  : 150,
-
-							closeClick : true,
-
-							helpers : {
-								overlay : null
-								,thumbs : {
-									width: 75,
-									height: 50
-								}
-							}
-						}); */
-
-						$.fancybox.open([
-							{
-								href : 'img/a1cad.jpg',
-								title : 'A1外掛'
-							}, {
-								href : 'img/A1外掛.jpg',
-								title : 'A1外掛'
-							}, {
-								href : 'img/A1洗洞.jpg',
-								title : 'A1洗洞'
-							}
-						],{
-							helpers : {
-								thumbs : {
-									width: 50,
-									height: 50
-								}
-							}
-						}); 
+						$('#fan1').addClass('fan_div_move1');
+						$('#fan2').addClass('fan_div_move2');
 
 						/*$('#fan1').delay(500).queue(function(next){
 							$(this).addClass("fan1_hover");
@@ -455,7 +400,33 @@
 			    }
 			});
 			
+			
+			$("#fan1").click(function() {
+				$.fancybox.open({
+						href : 'A1.html',
+						type : 'iframe',
+						title : 'A1陽台洗洞位置'
+					},{
+						padding: 0,
 
+						openEffect : 'elastic',
+						openSpeed  : 150,
+
+						closeEffect : 'elastic',
+						closeSpeed  : 150,
+
+						closeClick : true,
+
+						helpers : {
+							overlay : null
+						}
+					});
+				
+			});
+
+
+
+		
 
 			var WIDTH  = $('#showA1Div').width();
 			var HEIGHT = $('#showA1Div').height();
@@ -463,8 +434,7 @@
 			var camera, controls, scene, renderer;
 			init();
 			animate();
-			var mesh = null;
-			var SPEED = 0.01;
+
 
 			function init() {
 			    scene = new THREE.Scene();
@@ -487,11 +457,10 @@
 				controls.enableDamping = true;
 				controls.dampingFactor = 0.80;
 				controls.enableZoom = true;
-				controls.autoRotate=true
 
 
 			    stats = new Stats();
-				//container.appendChild( stats.dom );
+				container.appendChild( stats.dom );
 			    window.addEventListener( 'resize', onWindowResize, true );
 			    
 			}
@@ -514,6 +483,7 @@
 				stats.update();
 
 				render();
+
 			}
 
 			function render() {
@@ -539,15 +509,7 @@
 			function initLights() {
 			     //var light = new THREE.AmbientLight(0xffffff);
 			    light = new THREE.DirectionalLight( 0xffffff );
-				light.position.set( 1, 1, 5 );
-				scene.add( light );
-
-				light = new THREE.DirectionalLight( 0xffffff );
-				light.position.set( -2, -3, 5 );
-				scene.add( light );
-
-				light = new THREE.DirectionalLight( 0xffffff );
-				light.position.set( -1, 10, 20 );
+				light.position.set( 1, 1, 1 );
 				scene.add( light );
 
 				light = new THREE.DirectionalLight( 0x111111 );
@@ -559,7 +521,7 @@
 				light = new THREE.SpotLight( 0xffffff, 0.5, 0.0, 180, 20 );
 				scene.add( light );
 			}
-			
+
 			
 			function initMesh() {
 			    var loader = new THREE.JSONLoader();
@@ -594,18 +556,18 @@ http://www.emanueleferonato.com/2014/12/10/html5-webgl-360-degrees-panorama-view
 -->
 <div id="fullpage">
 	<div class="section " id="section0">
-		<h1>美境冷氣外掛方案</h1>
+		<h1>冷氣外掛方案</h1>
 		<!--<img alt="Mona Lisa" src="img/A3.png" title="A3" class="test" />
 		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" />
 		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" />-->
 		<div class="row">
-		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A3外掛位置" ><img alt="A3" src="img/A3.png" title="A3" class="test" /></a></div>
-		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A2外掛位置" ><img alt="A2" src="img/A2.png" title="A2" class="test" /></a></div>
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><img alt="A3" src="img/A3.png" title="A3" class="test" /></div>
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><img alt="A2" src="img/A2.png" title="A2" class="test" /></div>
 
 		  <!-- Add the extra clearfix for only the required viewport -->
 		  
 
-		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A1外掛位置" ><img alt="A1" src="img/A1.png" title="A1" class="test" /></a></div>
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><img alt="A1" src="img/A1.png" title="A1" class="test" /></div>
 
 		   <!-- <div class="clearfix visible-xs-block">12</div>-->
 		</div>
@@ -633,8 +595,8 @@ http://www.emanueleferonato.com/2014/12/10/html5-webgl-360-degrees-panorama-view
 		</div>
 	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>-->
 	</div>
-	<!--<div class="section" id="section2"><h1>Lovely images <br />for a lovely page</h1></div>
-	<div class="section" id="section3"><h1>One Image = One thousand words</h1></div>-->
+	<div class="section" id="section2"><h1>Lovely images <br />for a lovely page</h1></div>
+	<div class="section" id="section3"><h1>One Image = One thousand words</h1></div>
 </div>
 
 </body>
