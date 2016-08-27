@@ -52,7 +52,7 @@
 			var meshA1,meshA2,meshA3,book,titleMesh;
 			var stop = false;
 
-			showImg();
+			//showImg();
 			function init() {
 				raycaster = new THREE.Raycaster();
 				mouse = new THREE.Vector2();
@@ -84,6 +84,7 @@
 			        meshA1.scale.x = meshA1.scale.y = meshA1.scale.z = 0.75;
 			        meshA1.translation = THREE.GeometryUtils.center(geometry);
 			        meshA1.position.setX(1.2);
+			        meshA1.position.setZ(0.4);
 			        meshA1.callback =function() {
 			        	console.log('A1');
 			        	stop = true;
@@ -95,7 +96,7 @@
 			        scene.add(meshA1);
 			        objects.push(meshA1);
 			    });
-
+/*
 			    loader.load('json/title.json', function(geometry, materials) {
 			        titleMesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 			        titleMesh.scale.x = titleMesh.scale.y = titleMesh.scale.z = 0.55;
@@ -108,7 +109,7 @@
 			       
 			        scene.add(titleMesh);
 			        objects.push(titleMesh);
-			    });
+			    });*/
 
 			    loader.load('json/A2.json', function(geometry, materials) {
 			        meshA2 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
@@ -119,6 +120,20 @@
 			        }
 			        scene.add(meshA2);
 			        objects.push(meshA2);
+
+			    });
+
+			    loader.load('json/A3.json', function(geometry, materials) {
+			        meshA3 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        meshA3.scale.x = meshA3.scale.y = meshA3.scale.z = 0.75;
+			        meshA3.translation = THREE.GeometryUtils.center(geometry);
+			        meshA3.position.setX(-1.5);
+
+			        meshA3.callback =function() {
+			        	console.log('A2');
+			        }
+			        scene.add(meshA3);
+			        objects.push(meshA3);
 
 			    });
 
@@ -205,7 +220,9 @@
 
 			    if ( intersects.length > 0 ) {
 
-			        intersects[0].object.callback();
+			        if(intersects[0].object.callback != undefined) {
+			    		intersects[0].object.callback();
+			    	}
 
 			    }
 
@@ -223,8 +240,10 @@
 			    var intersects = raycaster.intersectObjects( objects ); 
 
 			    if ( intersects.length > 0 ) {
-
-			        intersects[0].object.callback2();
+			    	if(intersects[0].object.callback2 != undefined) {
+			    		intersects[0].object.callback2();
+			    	}
+			        
 
 			    }
 
