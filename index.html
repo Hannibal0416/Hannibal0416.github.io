@@ -49,7 +49,7 @@
 			var objects = [];
 			init();
 			animate();
-			var meshA1,meshA2,meshA3,book,titleMesh;
+			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,titleMesh;
 			var stop = false;
 
 			showImg();
@@ -74,7 +74,7 @@
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
 				controls.enableDamping = true;
-				controls.dampingFactor = 0.25;
+				controls.dampingFactor = 0.01;
 				controls.enableZoom = true;
 
 				var loader = new THREE.JSONLoader();
@@ -138,18 +138,44 @@
 			    });
 
 
-			    loader.load('json/book.json', function(geometry, materials) {
-			        book = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-			        book.scale.x = book.scale.y = book.scale.z =0.1;
-			        book.translation = THREE.GeometryUtils.center(geometry);
-			        book.rotation.x -=5.5;
-			        book.position.setY(0.8);
-
-			        book.callback =function() {
+			    loader.load('json/bookA1.json', function(geometry, materials) {
+			        bookA1 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        bookA1.scale.x = bookA1.scale.y = bookA1.scale.z =0.1;
+			        bookA1.translation = THREE.GeometryUtils.center(geometry);
+			        bookA1.position.setY(0.8);
+					bookA1.position.setX(1.2);
+			        bookA1.callback =function() {
 			        	showImg();
 				     }
-			        scene.add(book);
-			        objects.push(book);
+			        scene.add(bookA1);
+			        objects.push(bookA1);
+
+			    });
+
+			    loader.load('json/bookA2.json', function(geometry, materials) {
+			        bookA2 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        bookA2.scale.x = bookA2.scale.y = bookA2.scale.z =0.1;
+			        bookA2.translation = THREE.GeometryUtils.center(geometry);
+			        bookA2.position.setY(0.8);
+			        bookA2.callback =function() {
+			        	showImg();
+				     }
+			        scene.add(bookA2);
+			        objects.push(bookA2);
+
+			    });
+
+			    loader.load('json/bookA3.json', function(geometry, materials) {
+			        bookA3 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        bookA3.scale.x = bookA3.scale.y = bookA3.scale.z =0.1;
+			        bookA3.translation = THREE.GeometryUtils.center(geometry);
+			        bookA3.position.setY(0.8);
+					bookA3.position.setX(-1.2);
+			        bookA3.callback =function() {
+			        	showImg();
+				     }
+			        scene.add(bookA3);
+			        objects.push(bookA3);
 
 			    });
 
@@ -259,13 +285,13 @@
 			}
 
 			function rotateMesh() {
-			    if (!book) {
+			    if (!bookA1) {
 			        return;
 			    }
 			    if (stop == false) {
-			    	book.rotation.x -= 0.015;
-			    	book.rotation.y -= 0.015;
-			    	book.rotation.z -= 0.015;
+			    	bookA1.rotation.y -= 0.015;
+			    	bookA2.rotation.y -= 0.015;
+			    	bookA3.rotation.y -= 0.015;
 			    }
 
 			   
