@@ -65,9 +65,9 @@
 				var container = document.getElementById( 'container' );
 				container.appendChild( renderer.domElement );
 
-				camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 1, 1000 );
+				camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.z = 15;
-				camera.position.y = 15;
+				camera.position.y = 5;
 
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
@@ -94,6 +94,20 @@
 			        objects.push(meshA1);
 			    });
 
+			    loader.load('json/title.json', function(geometry, materials) {
+			        titleMesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        titleMesh.scale.x = titleMesh.scale.y = titleMesh.scale.z = 0.55;
+			        titleMesh.translation = THREE.GeometryUtils.center(geometry);
+			        titleMesh.position.setY(1.2);
+			        titleMesh.callback =function() {
+			        	console.log('title');
+			        	stop = true;
+			        };
+			       
+			        scene.add(titleMesh);
+			        objects.push(titleMesh);
+			    });
+
 			    loader.load('json/A2.json', function(geometry, materials) {
 			        meshA2 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 			        meshA2.scale.x = meshA2.scale.y = meshA2.scale.z = 0.75;
@@ -105,14 +119,15 @@
 			        objects.push(meshA2);
 
 			    });
-			    
+
+
 			    loader.load('json/book.json', function(geometry, materials) {
 			        book = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 			        book.scale.x = book.scale.y = book.scale.z =0.1;
 			        book.translation = THREE.GeometryUtils.center(geometry);
 			        book.rotation.x -=5.5;
 			        book.position.setY(0.8);
-			        book.position.setX(0.5);
+
 			        book.callback =function() {
 			        	$.fancybox.open([
 								{
@@ -156,6 +171,9 @@
 				light = new THREE.AmbientLight( 0x222222 );
 				scene.add( light );
 				light = new THREE.SpotLight( 0xffffff, 0.5, 0.0, 180, 20 );
+				scene.add( light );
+				light = new THREE.SpotLight( 0xffffff, 0.5, 0.0, 180, 20 );
+				light.position.set( 1, 5, 1 );
 				scene.add( light );
 				//
 
@@ -220,7 +238,9 @@
 			        return;
 			    }
 			    if (stop == false) {
-			    	 book.rotation.y -= 0.015;
+			    	book.rotation.x -= 0.015;
+			    	book.rotation.y -= 0.015;
+			    	book.rotation.z -= 0.015;
 			    }
 
 			   
