@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - orbit controls</title>
+		<title>美境冷氣外掛方案</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" />
@@ -51,6 +51,8 @@
 			animate();
 			var meshA1,meshA2,meshA3,book,titleMesh;
 			var stop = false;
+
+			showImg();
 			function init() {
 				raycaster = new THREE.Raycaster();
 				mouse = new THREE.Vector2();
@@ -129,26 +131,8 @@
 			        book.position.setY(0.8);
 
 			        book.callback =function() {
-			        	$.fancybox.open([
-								{
-									href : 'img/a1cad.jpg',
-									title : 'A1外掛'
-								}, {
-									href : 'img/A1外掛.jpg',
-									title : 'A1外掛'
-								}, {
-									href : 'img/A1洗洞.jpg',
-									title : 'A1洗洞'
-								}
-							],{
-								helpers : {
-									thumbs : {
-										width: 50,
-										height: 50
-									}
-								}
-							}); 
-				     	}
+			        	showImg();
+				     }
 			        scene.add(book);
 			        objects.push(book);
 
@@ -184,6 +168,28 @@
 				window.addEventListener( 'mouseup', onDocumentMouseUp, false );
 				window.addEventListener( 'resize', onWindowResize, false );
 
+			}
+
+			function showImg(){
+				$.fancybox.open([
+					{
+						href : 'img/a1cad.jpg',
+						title : 'A1外掛'
+					}, {
+						href : 'img/A1外掛.jpg',
+						title : 'A1外掛'
+					}, {
+						href : 'img/A1洗洞.jpg',
+						title : 'A1洗洞'
+					}
+				],{
+					helpers : {
+						thumbs : {
+							width: 50,
+							height: 50
+						}
+					}
+				}); 
 			}
 
 			function onDocumentMouseDown( event ) {
