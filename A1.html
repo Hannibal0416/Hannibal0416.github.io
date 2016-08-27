@@ -34,7 +34,7 @@
 			    initRenderer();
 				onMouseDownPosition = new THREE.Vector2();
 			    document.body.appendChild(renderer.domElement);
-			    document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+			    //document.addEventListener( 'mousemove', onDocumentMouseMove, false );
 
 			}
 
@@ -70,6 +70,17 @@
 			        mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
 			        mesh.translation = THREE.GeometryUtils.center(geometry);
 			        scene.add(mesh);
+			        mesh.position = new THREE.Vector3(20,30,20);
+			        
+			    });
+			    var loader2 = new THREE.JSONLoader();
+			    var mesh2;
+			    loader2.load('json/A2.json', function(geometry, materials) {
+			        mesh2 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        mesh2.scale.x = mesh2.scale.y = mesh2.scale.z = 0.75;
+			        mesh2.translation = THREE.GeometryUtils.center(geometry);
+			        mesh2.position.setX(2);
+			        scene.add(mesh2);
 			    });
 			}
 

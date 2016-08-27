@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>美境冷氣外掛方案</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="美境冷氣外掛方案" />
+	<meta name="keywords"  content="fullpage,jquery,demo,screen,fixed,fullscreen,backgrounds,full-screen" />
+	<meta name="Resource-type" content="Document" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+
+
+
+	<link rel="stylesheet" type="text/css" href="css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="css/examples.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox-thumbs.css" />
+	
+	
+	<!-- Latest compiled and minified CSS 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+<!-- Latest compiled and minified JavaScript 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery-3.1.0.js"></script>-->
+	<script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+	
+	<script type="text/javascript" src="js/jquery-ui-1.12.0.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox-thumbs.js"></script>
+	<script type="text/javascript" src="js/jquery.fullPage.js"></script>
+	<script type="text/javascript" src="js/three.js"></script>
+	<script type="text/javascript" src="js/OrbitControls.js"></script>
+	<script type="text/javascript" src="js/Detector.js"></script>
+	<script type="text/javascript" src="js/stats.min.js"></script>
+	<style>
+
+	/* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 2em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+		padding:0;
+	}
+	h2{
+		font-size: 1em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+		padding:0;
+	}
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+
+	/* Backgrounds will cover all the section
+	* --------------------------------------- */
+	#section0,
+	#sectionA1,
+	#section2,
+	#section3{
+		background-size: cover;
+		background-attachment: fixed;
+	}
+
+	/* Defining each sectino background and styles
+	* --------------------------------------- 
+	#section0{
+		background-image: url(http://1.bp.blogspot.com/-W8D9ye4xKUw/VBpMRnf4OGI/AAAAAAAACF0/yMl9EYIbwzU/s1600/%E6%A1%8C%E5%B8%83-00042.jpg);
+		padding: 30% 0 0 0;
+	}*/
+	#section0{
+		background-color:#03030a;
+		padding: 3% 0 0 0;
+	}
+	#sectionA1{
+		background-color:#03030a;
+		padding: 3% 0 0 0;
+	}
+	#sectionA2{
+		padding: 3% 0 0 0;
+	}
+	#sectionA3{
+		padding: 3% 0 0 0;
+	}
+	#sectionA3 h1{
+		color: #000;
+	}
+
+
+ 	/*Adding background for the slides
+	* --------------------------------------- 
+	#slide1{
+		/*background-color:#03030a;
+		padding: 6% 0 0 0;*/
+	}
+	#slide2{
+		background-image: url(http://1.bp.blogspot.com/-YdNxIh4NteU/VBpMTdBe-UI/AAAAAAAACGE/mz2NBzrj0l0/s1600/%E6%A1%8C%E5%B8%83-00046.jpg);
+		padding: 6% 0 0 0;
+	}
+
+
+	/* Bottom menu
+	* --------------------------------------- */
+	#infoMenu li a {
+		color: #fff;
+	}
+
+	.test {
+		-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,.4), rgba(0, 0, 0,.4));
+	}
+	.test:hover {
+		-webkit-mask-image:-webkit-linear-gradient(top, rgba(0, 0, 0,1), rgba(0, 0, 0,1));
+	}
+	
+	.test[title=A1] {
+		width:90%;height:100%;
+	}
+	.test[title=A2] {
+		width:90%;height:100%;
+	}
+	.test[title=A3] {
+		width:90%;height:100%;
+	}
+	
+	.pic {
+	  border: 5px solid #fff;  
+	  float: center;
+	  width:90%;
+	  height:80%;
+	  margin: 3%;
+	  overflow: hidden;
+	  
+	  -webkit-box-shadow: 5px 5px 5px #111;
+			  box-shadow: 5px 5px 5px #111;  
+	}
+	/*
+	.showA1{
+		width:40%;
+		height:100%;
+		-webkit-transition:  all 1s ease ;
+		-moz-transition: all 1s ease;
+		-o-transition: all 1s ease;
+		-ms-transition: all 1s ease;
+		transition: all 1s ease;
+	}
+	
+	.showA1:hover {
+		width:100%;
+		height:300%;
+		margin-top: -90%;
+	}
+
+	
+	@-webkit-keyframes rotate {
+	  from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	  }
+	  to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+
+	  }
+	}
+	@keyframes rotate {
+	  from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	  }
+	  to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	  }
+	}
+	
+	@-webkit-keyframes fanMove1  {
+	  from {
+		top:0%;
+		left:0%
+	  }
+	  to {
+		top:50%;
+		left:50%
+	  }
+	}
+	@keyframes fanMove1 {
+	  from {
+		top:0%;
+		left:0%
+	  }
+	  to {
+		top:50%;
+		left:50%
+	  }
+	}
+	
+	@-webkit-keyframes fanMove2  {
+	  from {
+		top:0%;
+		left:0%
+	  }
+	  to {
+		top:50%;
+		left:50%
+	  }
+	}
+	@keyframes fanMove2 {
+	  from {
+		top:0%;
+		left:0%
+	  }
+	  to {
+		top:50%;
+		left:60%
+	  }
+	}
+	
+	.fan_div {
+		border: 1px solid #000;  
+		float: center;
+		width:7%;
+		height:auto;
+		margin: 5%;
+		position : absolute;
+		overflow: hidden;
+		top:50%;
+		
+	}
+	
+	.fan_div_move1 {
+		left:50%;
+		-webkit-animation: fanMove1 0.5s ease;
+		-moz-animation: fanMove1 0.5s ease;
+		-o-animation: fanMove1 0.5s ease;
+		-ms-animation: fanMove1 0.5s ease;
+		animation: fanMove1 0.5s ease;
+	}
+	.fan_div_move2 {
+		left:60%;
+		-webkit-animation: fanMove2 0.5s ease;
+		-moz-animation: fanMove2 0.5s ease;
+		-o-animation: fanMove2 0.5s ease;
+		-ms-animation: fanMove2 0.5s ease;
+		animation: fanMove2 0.5s ease;
+	}
+	
+	.fan{
+		width:100%;
+		height:100%;
+		-webkit-animation: rotate 0.5s linear infinite;
+		-moz-animation: rotate 0.5s linear infinite;
+		-ms-animation: rotate 0.5s linear infinite;
+		-o-animation: rotate 0.5s linear infinite;
+		animation: rotate 0.5s linear infinite;
+	}
+	*/
+	
+	@media screen and (min-width: 100px) and (max-width: 540px) {
+		.test[title=A1] {
+			width:30%;
+			height:40%;
+		}
+		.test[title=A2] {
+			width:30%;
+			height:30%;
+		}
+		.test[title=A3] {
+			width:40%;
+			height:30%;
+		}
+		.fan_div {
+			width:10%;
+		}
+		.pic {
+
+			height:90%;
+
+		}
+		
+		.showA1{
+			width:100%;
+			height:100%;
+		}
+		.showA1:hover {
+			width:130%;
+			height:130%;
+			max-width:130%;
+			max-height:130%;
+			margin-top: -80%;
+			margin-left: -10%;
+			-webkit-transition: rotate(180deg);
+			-moz-transition: rotate(180deg);
+			-o-transition: rotate(180deg);
+			-ms-transition: rotate(180deg);
+			transition: rotate(180deg);
+		}
+	}
+	
+	</style>
+
+
+	<script type="text/javascript">
+
+
+		var stats;
+		var camera, controls, sceneA1,sceneA2,sceneA3, renderer;
+		var mesh = null;
+		
+
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				verticalCentered: false,
+				sectionsColor: ['#000000', '#1BBC9B', '#7E8F7C','#C63D0F'],
+				anchors: ['美境冷氣外掛方案', 'A1外掛位置', 'A2外掛位置', 'A3外掛位置'],
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['美境外掛方案', 'A1外掛位置', 'A2外掛位置', 'A3外掛位置'],
+
+				css3:true,
+				onLeave: function(index, nextIndex, direction){
+			    	if(deleteLog){
+			    		$('#callbacksDiv').html('');
+			    	}
+			    	$('#callbacksDiv').append('<p>onLeave - index:' + index + ' nextIndex:' + nextIndex + ' direction:' + direction + '</p>')
+					console.log("onLeave--" + "index: " + index + " nextIndex: " + nextIndex + " direction: " +  direction);
+			    },
+			    onSlideLeave: function(anchorLink, index, slideIndex, direction, nextSlideIndex){
+			    	if(deleteLog){
+			    		$('#callbacksDiv').html('');
+			    	}
+			    	$('#callbacksDiv').append('<p>onSlideLeave - anchorLink:' + anchorLink + " index:" + index + " slideIndex:" + slideIndex +" direction:" + direction + " nextSlideIndex:" + nextSlideIndex + '</p>');
+					console.log("onSlideLeave--" + "anchorLink: " + anchorLink + " index: " + index + " slideIndex: " + slideIndex + " direction: " + direction);
+			    },
+			    afterRender: function(){
+			    	$('#callbacksDiv').append('<p>afterRender</p>');
+			    	console.log("afterRender");
+			    },
+			    afterResize: function(){
+			    	$('#callbacksDiv').append('<p>afterResize</p>');
+			    	console.log("afterResize");
+			    },
+			    afterSlideLoad: function(anchorLink, index, slideAnchor, slideIndex){
+			    	$('#callbacksDiv').append('<p>afterSlideLoad - anchorLink:' + anchorLink + " index:" + index + " slideAnchor:" + slideAnchor +" slideIndex:" + slideIndex + '</p>');
+			    	deleteLog = true;
+			    	console.log("afterSlideLoad--" + "anchorLink: " + anchorLink + " index: " + index + " slideAnchor: " + slideAnchor + " slideIndex: " + slideIndex);
+					console.log("----------------");
+			    },
+			    afterLoad: function(anchorLink, index){
+
+			    	var action;
+					if(index == 2){
+						action = 'A1';
+						$.fancybox.open([
+							{
+								href : 'img/a1cad.jpg',
+								title : 'A1外掛'
+							}, {
+								href : 'img/A1外掛.jpg',
+								title : 'A1外掛'
+							}, {
+								href : 'img/A1洗洞.jpg',
+								title : 'A1洗洞'
+							}
+						],{
+							helpers : {
+								thumbs : {
+									width: 50,
+									height: 50
+								}
+							}
+						}); 
+
+						
+					} else if (index ==3) {
+						action = 'A2';
+						
+
+					} else if (index ==4) {
+						action = 'A3';
+
+					}
+
+					//section 3
+					if(anchorLink == '3rdPage'){
+						//moving the image
+						/*
+						$('#section2').find('.intro').delay(500).animate({
+							left: '0%'
+						}, 1500, 'easeOutExpo');
+						*/
+					}
+				
+				
+			    	$('#callbacksDiv').append('<p>afterLoad - anchorLink:' + anchorLink + " index:" + index + '</p>');
+					deleteLog = true;
+					console.log('===============');
+					console.log("afterLoad--" + "anchorLink: " + anchorLink + " index: " + index );
+			    }
+			});
+			
+
+
+			var WIDTH  = $('#showA1Div').width();
+			var HEIGHT = $('#showA1Div').height();
+
+			init();
+			animate();
+
+			function initA1(){
+				sceneA1 = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x03030a, 0.002 );
+			}
+
+			function initA2(){
+				sceneA2 = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x03030a, 0.002 );
+			}
+
+			function initA3(){
+				sceneA3 = new THREE.Scene();
+				scene.fog = new THREE.FogExp2( 0x03030a, 0.002 );
+				initMesh();
+			}
+
+
+			function init() {
+			   
+
+			    
+			    initCamera();
+			    initLights();
+			    initRenderer();
+
+			    //$('#showA1Div').empty();
+			    var container = document.getElementById( 'showA1Div' );
+				container.appendChild( renderer.domElement );
+				controls = new THREE.OrbitControls( camera, renderer.domElement );
+				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
+				controls.enableDamping = true;
+				controls.dampingFactor = 0.80;
+				controls.enableZoom = true;
+				controls.autoRotate=true
+
+
+			    stats = new Stats();
+				//container.appendChild( stats.dom );
+			    window.addEventListener( 'resize', onWindowResize, true );
+			    
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				controls.update(); // required if controls.enableDamping = true, or if controls.autoRotate = true
+
+				stats.update();
+
+				render();
+			}
+
+			function render() {
+
+				renderer.render( scene, camera );
+
+			}
+
+			function initCamera() {
+			    camera = new THREE.PerspectiveCamera(30, WIDTH / HEIGHT, 1, 10);
+			    camera.position.set(0, 3.5, 5);
+			    camera.lookAt(scene.position);
+			}
+
+
+			function initRenderer() {
+			    renderer = new THREE.WebGLRenderer();
+				renderer.setClearColor( scene.fog.color );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( WIDTH, HEIGHT );
+			}
+
+			function initLights() {
+			     //var light = new THREE.AmbientLight(0xffffff);
+			    light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 1, 1, 5 );
+				scene.add( light );
+
+				light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( -2, -3, 5 );
+				scene.add( light );
+
+				light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( -1, 10, 20 );
+				scene.add( light );
+
+				light = new THREE.DirectionalLight( 0x111111 );
+				light.position.set( -1, -1, -1 );
+				scene.add( light );
+
+				light = new THREE.AmbientLight( 0x222222 );
+				scene.add( light );
+				light = new THREE.SpotLight( 0xffffff, 0.5, 0.0, 180, 20 );
+				scene.add( light );
+			}
+			
+			
+			function initMesh() {
+			    var loader = new THREE.JSONLoader();
+			    loader.load('json/A1.json', function(geometry, materials) {
+			        mesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        mesh.scale.x = mesh.scale.y = mesh.scale.z = 0.75;
+			        mesh.translation = THREE.GeometryUtils.center(geometry);
+			        scene.add(mesh);
+			    });
+			}
+
+
+		});
+
+		
+		
+		
+		
+	</script>
+
+</head>
+<body>
+<!--
+<ul id="menu">
+	<li data-menuanchor="firstPage"><a href="#firstPage">First slide</a></li>
+	<li data-menuanchor="secondPage"><a href="#secondPage">Second slide</a></li>
+	<li data-menuanchor="3rdPage"><a href="#3rdPage">Third slide</a></li>
+</ul>
+http://blog.yam.com/hanasan/article/160653512#pending
+http://fancyapps.com/fancybox/
+http://www.emanueleferonato.com/2014/12/10/html5-webgl-360-degrees-panorama-viewer-with-three-js/
+-->
+<div id="fullpage">
+	<div class="section " id="section0">
+		<h1>美境冷氣外掛方案</h1>
+		<!--<img alt="Mona Lisa" src="img/A3.png" title="A3" class="test" />
+		<img alt="Mona Lisa" src="img/A2.png" title="A2" class="test" />
+		<img alt="Mona Lisa" src="img/A1.png" title="A1" class="test" />-->
+		<div class="row">
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A3外掛位置" ><img alt="A3" src="img/A3.png" title="A3" class="test" /></a></div>
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A2外掛位置" ><img alt="A2" src="img/A2.png" title="A2" class="test" /></a></div>
+
+		  <!-- Add the extra clearfix for only the required viewport -->
+		  
+
+		  <div class="col-xs-12 col-xxs-4 col-sm-4 col-md-4"><a href="#A1外掛位置" ><img alt="A1" src="img/A1.png" title="A1" class="test" /></a></div>
+
+		   <!-- <div class="clearfix visible-xs-block">12</div>-->
+		</div>
+	</div>
+	<div class="section" id="sectionA1">
+		<h1>A1外掛位置</h1>
+			
+		<div class="pic" id="showA1Div">
+		
+
+		
+
+			<!--<img alt="A1" src="img/A1.png" id="showA1" class="showA1"  />
+			<div class="fan_div" id="fan1" >
+				<img alt="Fan1" src="img/fan.png" class="fan" />
+			</div>
+			<div class="fan_div" id="fan2">
+				<img alt="Fan2" src="img/fan.png"  class="fan"  />
+			</div>-->
+			
+		</div>
+		
+	    <!--<div class="slide" id="slide1">
+			
+		</div>
+	    <div class="slide" id="slide2"><h1>Totally customizable</h1></div>-->
+	</div>
+	<div class="section" id="sectionA2"><h1>A2外掛位置</h1>
+		<div class="pic" id="showA2Div">
+			施工中…
+			
+		</div>
+	</div>
+	<div class="section" id="sectionA3"><h1>A3外掛位置</h1>
+		<div class="pic" id="showA2Div">
+			施工中…
+			
+		</div>
+	</div>
+</div>
+
+</body>
+</html>
