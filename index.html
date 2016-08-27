@@ -50,7 +50,7 @@
 			init();
 			animate();
 			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,titleMesh;
-			var stop = false;
+
 
 			showImg();
 			function init() {
@@ -74,7 +74,7 @@
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
 				controls.enableDamping = true;
-				controls.dampingFactor = 0.01;
+				controls.dampingFactor = 1;
 				controls.enableZoom = true;
 
 				var loader = new THREE.JSONLoader();
@@ -87,11 +87,10 @@
 			        meshA1.position.setZ(0.4);
 			        meshA1.callback =function() {
 			        	console.log('A1');
-			        	stop = true;
 			        };
 			        meshA1.callback2 =function() {
 			        	console.log('A1 stop');
-			        	stop = false;
+
 			        }
 			        scene.add(meshA1);
 			        objects.push(meshA1);
@@ -288,11 +287,9 @@
 			    if (!bookA1) {
 			        return;
 			    }
-			    if (stop == false) {
-			    	bookA1.rotation.y -= 0.015;
-			    	bookA2.rotation.y -= 0.015;
-			    	bookA3.rotation.y -= 0.015;
-			    }
+		    	bookA1.rotation.y -= 0.015;
+		    	bookA2.rotation.y -= 0.015;
+		    	bookA3.rotation.y -= 0.015;
 
 			   
 
