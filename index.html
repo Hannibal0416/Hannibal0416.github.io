@@ -52,7 +52,7 @@
 			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,titleMesh;
 
 
-			showImg();
+			//showImg();
 			function init() {
 				raycaster = new THREE.Raycaster();
 				mouse = new THREE.Vector2();
@@ -144,7 +144,19 @@
 			        bookA1.position.setY(0.8);
 					bookA1.position.setX(1.2);
 			        bookA1.callback =function() {
-			        	showImg();
+			        	var A1Img = [
+							{
+								href : 'img/a1cad.jpg',
+								title : 'A1外掛'
+							}, {
+								href : 'img/A1外掛.jpg',
+								title : 'A1外掛'
+							}, {
+								href : 'img/A1洗洞.jpg',
+								title : 'A1洗洞'
+							}
+						];
+			        	showImg(A1Img);
 				     }
 			        scene.add(bookA1);
 			        objects.push(bookA1);
@@ -157,7 +169,19 @@
 			        bookA2.translation = THREE.GeometryUtils.center(geometry);
 			        bookA2.position.setY(0.8);
 			        bookA2.callback =function() {
-			        	showImg();
+			        	var A2Img = [
+							{
+								href : 'img/a2cad.jpg',
+								title : 'A1外掛'
+							}, {
+								href : 'img/A2_外掛.jpg',
+								title : 'A2外掛'
+							}, {
+								href : 'img/A2_陽台洗洞.jpg',
+								title : 'A2洗洞'
+							}
+						];
+			        	showImg(A2Img);
 				     }
 			        scene.add(bookA2);
 			        objects.push(bookA2);
@@ -171,7 +195,22 @@
 			        bookA3.position.setY(0.8);
 					bookA3.position.setX(-1.2);
 			        bookA3.callback =function() {
-			        	showImg();
+			        	var A3Img = [
+							{
+								href : 'img/a3cad.jpg',
+								title : 'A3外掛'
+							}, {
+								href : 'img/A3_外牆.jpg',
+								title : 'A3外掛'
+							}, {
+								href : 'img/A3_內牆.jpg',
+								title : 'A3洗洞'
+							}, {
+								href : 'img/A3_3.png',
+								title : 'A3陽台很小'
+							}
+						];
+			        	showImg(A3Img);
 				     }
 			        scene.add(bookA3);
 			        objects.push(bookA3);
@@ -210,19 +249,8 @@
 
 			}
 
-			function showImg(){
-				$.fancybox.open([
-					{
-						href : 'img/a1cad.jpg',
-						title : 'A1外掛'
-					}, {
-						href : 'img/A1外掛.jpg',
-						title : 'A1外掛'
-					}, {
-						href : 'img/A1洗洞.jpg',
-						title : 'A1洗洞'
-					}
-				],{
+			function showImg(imgObj){
+				$.fancybox.open(imgObj,{
 					helpers : {
 						thumbs : {
 							width: 50,
@@ -231,6 +259,10 @@
 					}
 				}); 
 			}
+
+			
+
+
 
 			function onDocumentMouseDown( event ) {
 

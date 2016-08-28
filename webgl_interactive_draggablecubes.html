@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - draggable cubes</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				font-family: Monospace;
+				background-color: #f0f0f0;
+				margin: 0px;
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+
+		<script src="js/three.js"></script>
+
+		<script src="js/TrackballControls.js"></script>
+
+		<script src="js/stats.min.js"></script>
+
+		<script>
+
+			var container, stats;
+			var camera, controls, scene, renderer;
+			var objects = [];
+			var plane = new THREE.Plane();
+			var raycaster = new THREE.Raycaster();
+			var mouse = new THREE.Vector2(),
+			offset = new THREE.Vector3(),
+			intersection = new THREE.Vector3(),
+			INTERSECTED, SELECTED;
+
+			init();
+			animate();
+
+			function init() {
+
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
+
+				camera = new THREE.PerspectiveCamera( 10, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.z = 15;
+				camera.position.y = 5;
+
+				controls = new THREE.TrackballControls( camera );
+				controls.rotateSpeed = 1.0;
+				controls.zoomSpeed = 1.2;
+				controls.panSpeed = 0.8;
+				controls.noZoom = false;
+				controls.noPan = false;
+				controls.staticMoving = true;
+				controls.dynamicDampingFactor = 0.3;
+
+				scene = new THREE.Scene();
+
+				scene.add( new THREE.AmbientLight( 0x505050 ) );
+
+				var light = new THREE.SpotLight( 0xffffff, 1.5 );
+				light.position.set( 0, 500, 2000 );
+				light.castShadow = true;
+
+				light.shadow = new THREE.LightShadow( new THREE.PerspectiveCamera( 50, 1, 200, 10000 ) );
+				light.shadow.bias = - 0.00022;
+
+				light.shadow.mapSize.width = 2048;
+				light.shadow.mapSize.height = 2048;
+
+				scene.add( light );
+
+				var loader = new THREE.JSONLoader();
+
+				loader.load('json/external_unit.json', function(geometry, materials) {
+			        var external_unit = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        external_unit.scale.x = external_unit.scale.y = external_unit.scale.z = 1.75;
+			        external_unit.translation = THREE.GeometryUtils.center(geometry);
+			        external_unit.position.setY(1.2);
+			        external_unit.position.setX(0.5);
+			        external_unit.isSelected = false;
+			        external_unit.moveable = true;
+			       
+			       
+			        scene.add(external_unit);
+			        objects.push(external_unit);
+			    });
+
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setClearColor( 0xf0f0f0 );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				renderer.sortObjects = false;
+
+				renderer.shadowMap.enabled = true;
+				renderer.shadowMap.type = THREE.PCFShadowMap;
+
+				container.appendChild( renderer.domElement );
+
+				var info = document.createElement( 'div' );
+				info.style.position = 'absolute';
+				info.style.top = '10px';
+				info.style.width = '100%';
+				info.style.textAlign = 'center';
+				info.innerHTML = '<a href="http://threejs.org" target="_blank">three.js</a> webgl - draggable cubes';
+				container.appendChild( info );
+
+				stats = new Stats();
+				//container.appendChild( stats.dom );
+
+				renderer.domElement.addEventListener( 'mousemove', onDocumentMouseMove, false );
+				renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
+				renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+			}
+
+			function onWindowResize() {
+
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
+
+				renderer.setSize( window.innerWidth, window.innerHeight );
+
+			}
+
+			function onDocumentMouseMove( event ) {
+
+				event.preventDefault();
+
+				mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+				mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+
+				raycaster.setFromCamera( mouse, camera );
+
+				if ( SELECTED ) {
+
+					if ( raycaster.ray.intersectPlane( plane, intersection ) ) {
+
+						SELECTED.position.copy( intersection.sub( offset ) );
+
+					}
+
+					return;
+
+				}
+
+				
+
+			}
+
+			function onDocumentMouseDown( event ) {
+
+				event.preventDefault();
+
+				raycaster.setFromCamera( mouse, camera );
+
+				var intersects = raycaster.intersectObjects( objects );
+
+				if ( intersects.length > 0 ) {
+
+					controls.enabled = false;
+
+					SELECTED = intersects[ 0 ].object;
+
+					if ( raycaster.ray.intersectPlane( plane, intersection ) ) {
+
+						offset.copy( intersection ).sub( SELECTED.position );
+
+					}
+
+					container.style.cursor = 'move';
+
+				}
+
+			}
+
+			function onDocumentMouseUp( event ) {
+
+				event.preventDefault();
+
+				controls.enabled = true;
+
+				if ( INTERSECTED ) {
+
+					SELECTED = null;
+
+				}
+
+				container.style.cursor = 'auto';
+
+			}
+
+			//
+
+			function animate() {
+
+				requestAnimationFrame( animate );
+
+				render();
+				stats.update();
+
+			}
+
+			function render() {
+
+				controls.update();
+
+				renderer.render( scene, camera );
+
+			}
+
+		</script>
+
+	</body>
+</html>
