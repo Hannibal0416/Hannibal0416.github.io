@@ -38,9 +38,10 @@
 
 		<!--<script src="js/three.js"></script>
 		<script src='js/Projector.js'></script>-->
-	
+		
 		
 		<script>
+			
 
 			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
@@ -49,7 +50,7 @@
 			var objects = [];
 			init();
 			animate();
-			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,titleMesh;
+			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,question;
 
 
 			//showImg();
@@ -95,20 +96,23 @@
 			        scene.add(meshA1);
 			        objects.push(meshA1);
 			    });
-/*
-			    loader.load('json/title.json', function(geometry, materials) {
-			        titleMesh = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
-			        titleMesh.scale.x = titleMesh.scale.y = titleMesh.scale.z = 0.55;
-			        titleMesh.translation = THREE.GeometryUtils.center(geometry);
-			        titleMesh.position.setY(1.2);
-			        titleMesh.callback =function() {
-			        	console.log('title');
-			        	stop = true;
+
+			    loader.load('json/question.json', function(geometry, materials) {
+			        question = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
+			        question.scale.x = question.scale.y = question.scale.z = 0.55;
+			        question.translation = THREE.GeometryUtils.center(geometry);
+			        question.position.setY(1.3);
+			        question.callback =function() {
+			        	showImg([{
+							href : 'Question.html',
+							type : 'iframe',
+							title : '外掛疑問'
+						}]);
 			        };
 			       
-			        scene.add(titleMesh);
-			        objects.push(titleMesh);
-			    });*/
+			        scene.add(question);
+			        objects.push(question);
+			    });
 
 			    loader.load('json/A2.json', function(geometry, materials) {
 			        meshA2 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
@@ -322,6 +326,7 @@
 		    	bookA1.rotation.y -= 0.015;
 		    	bookA2.rotation.y -= 0.015;
 		    	bookA3.rotation.y -= 0.015;
+		    	question.rotation.y -= 0.015;
 
 			   
 
