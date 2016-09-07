@@ -38,7 +38,7 @@
 
 		<!--<script src="js/three.js"></script>
 		<script src='js/Projector.js'></script>-->
-		<video id="video" autoplay loop webkit-playsinline style="display:none">
+		<video id="video" loop webkit-playsinline style="display:none">
 			<source src="video/a1_window.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 		</video>
 		
@@ -81,6 +81,7 @@
 				controls.enableZoom = true;
 
 				video = document.getElementById( 'video' );
+				video.play();
 
 				texture = new THREE.VideoTexture( video );
 				texture.minFilter = THREE.LinearFilter;
