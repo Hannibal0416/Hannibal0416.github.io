@@ -38,7 +38,9 @@
 
 		<!--<script src="js/three.js"></script>
 		<script src='js/Projector.js'></script>-->
-		
+		<video id="video" autoplay loop webkit-playsinline style="display:none">
+			<source src="video/a1_window.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+		</video>
 		
 		<script>
 			
@@ -50,8 +52,8 @@
 			var objects = [];
 			init();
 			animate();
-			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,question;
-
+			var meshA1,meshA2,meshA3,bookA1,bookA2,bookA3,meshWindow,question;
+			var video, texture, material;
 
 			//showImg();
 			function init() {
@@ -70,7 +72,7 @@
 
 				camera = new THREE.PerspectiveCamera( 15, window.innerWidth / window.innerHeight, 1, 10000 );
 				camera.position.z = 15;
-				camera.position.y = 5;
+				camera.position.y = 10;
 
 				controls = new THREE.OrbitControls( camera, renderer.domElement );
 				//controls.addEventListener( 'change', render ); // add this only if there is no animation loop (requestAnimationFrame)
@@ -78,8 +80,29 @@
 				controls.dampingFactor = 1;
 				controls.enableZoom = true;
 
+				video = document.getElementById( 'video' );
+
+				texture = new THREE.VideoTexture( video );
+				texture.minFilter = THREE.LinearFilter;
+				texture.magFilter = THREE.LinearFilter;
+				texture.format = THREE.RGBFormat;
+				geometry = new THREE.BoxGeometry( 2, 1, 0.05 );
+				var parameters = { color: 0xffffff, map: texture };
+				material = new THREE.MeshLambertMaterial( parameters );
+				meshWindow = new THREE.Mesh( geometry, material );
+				meshWindow.position.setY(2);
+				meshWindow.callback =function() {
+			        	showImg([{
+							href : 'video/index.html',
+							type : 'iframe',
+							title : '二工窗安裝'
+						}]);
+			        };
+			    scene.add(meshWindow);
+				objects.push(meshWindow);
+
+
 				var loader = new THREE.JSONLoader();
-				
 			    loader.load('json/A1.json', function(geometry, materials) {
 			        meshA1 = new THREE.Mesh(geometry, new THREE.MeshFaceMaterial(materials));
 			        meshA1.scale.x = meshA1.scale.y = meshA1.scale.z = 0.75;
