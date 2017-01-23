@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+    </style>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCtr19cP23ZKZl0BTm9eG7RpfZ_q3VbP9c"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      function initialize() {
+	    var myHome = new google.maps.LatLng(25.081992, 121.674925);
+        var mapOptions = {
+          center: myHome,
+          zoom: 16
+        };
+		var myHomeImg = {
+				url:'img/myhome.png',
+				scaledSize: new google.maps.Size(32, 32),
+				origin: new google.maps.Point(0, 0),
+				anchor: new google.maps.Point(0, 32)
+			};
+		
+		
+        var map = new google.maps.Map(
+            document.getElementById('map-canvas'),
+            mapOptions);
+		
+		var marker = new google.maps.Marker({
+			position: myHome,
+			title: "舜家", 
+			map: map ,
+			animation: google.maps.Animation.BOUNCE,
+			icon: myHomeImg
+		});
+		
+		var infowindow = new google.maps.InfoWindow({
+			content: '舜家地址:新北市汐止區長興街二段56號5樓之3'
+		});
+		
+		marker.addListener('click', function() {
+			infowindow.open(map, marker);
+		});
+		
+		var customControlDiv = document.createElement('div');
+		var customControl = new CustomControl(customControlDiv, map);
+
+		customControlDiv.index = 1;
+		map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
+      }
+      google.maps.event.addDomListener(
+          window, 'load', initialize);
+		  
+		  
+	 // Create the DIV to hold the control and call the CustomControl() constructor passing in this DIV.
+	
+
+		function CustomControl(controlDiv, map) {
+		// Set CSS for the control border.
+			var controlUI = document.createElement('div');
+			var btn1 = document.createElement('button');
+			var btn2 = document.createElement('button');
+			btn1.className = "btn btn-primary";
+			btn1.innerHTML = "收費停車場"
+			btn2.className = "btn btn-primary";
+			btn2.innerHTML = "免費停車場"
+			controlUI.appendChild(btn1);
+			controlUI.appendChild(btn2);
+			controlDiv.appendChild(controlUI);
+
+			var freeParkingImg = {
+					url:'img/free-parking.png',
+					scaledSize: new google.maps.Size(48, 48),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(0, 48)
+			};
+
+			var freeParkingMarker = new google.maps.Marker({
+				position: {lat: 25.082516, lng: 121.674596},
+				animation: google.maps.Animation.DROP,
+				icon: freeParkingImg
+			});
+			
+			var parkingImg = {
+					url:'img/parking.png',
+					scaledSize: new google.maps.Size(32, 32),
+					origin: new google.maps.Point(0, 0),
+					anchor: new google.maps.Point(0, 32)
+			};
+
+			var parkingMarker = new google.maps.Marker({
+				position: {lat: 25.077805, lng: 121.667603},
+				animation: google.maps.Animation.DROP,
+				icon: parkingImg
+			});
+			
+			btn1.addEventListener('click', function() {
+				parkingMarker.setMap(map);
+			});
+		 
+			btn2.addEventListener('click', function() {
+				freeParkingMarker.setMap(map);
+			});
+		 
+
+		}
+    </script>
+  </head>
+  <body>
+<div id="map-canvas"></div>
+  </body>
+</html>
