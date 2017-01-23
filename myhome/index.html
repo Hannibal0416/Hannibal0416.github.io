@@ -9,10 +9,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
+      var myHomeLocation = new google.maps.LatLng(25.081992, 121.674925);
+
+      var wudoStationLocation = new google.maps.LatLng(25.081992, 121.674925);
       function initialize() {
-	    var myHome = new google.maps.LatLng(25.081992, 121.674925);
+	    
         var mapOptions = {
-          center: myHome,
+          center: myHomeLocation,
           zoom: 16
         };
 		var myHomeImg = {
@@ -28,7 +31,7 @@
             mapOptions);
 		
 		var marker = new google.maps.Marker({
-			position: myHome,
+			position: myHomeLocation,
 			title: "舜家", 
 			map: map ,
 			animation: google.maps.Animation.BOUNCE,
@@ -36,7 +39,7 @@
 		});
 		
 		var infowindow = new google.maps.InfoWindow({
-			content: '舜家地址:新北市汐止區長興街二段56號5樓之3'
+			content: '舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b><br/><img src="img/myHome.jpg" width="200" height="150" />'
 		});
 		
 		marker.addListener('click', function() {
@@ -61,12 +64,17 @@
 			var controlUI = document.createElement('div');
 			var btn1 = document.createElement('button');
 			var btn2 = document.createElement('button');
+			var btn3 = document.createElement('button');
+			var nag
 			btn1.className = "btn btn-primary";
-			btn1.innerHTML = "收費停車場"
+			btn1.innerHTML = "收費停車場";
 			btn2.className = "btn btn-primary";
-			btn2.innerHTML = "免費停車場"
+			btn2.innerHTML = "免費停車場";
+			btn3.className = "btn btn-primary";
+			btn3.innerHTML = "導航到舜與小君家";
 			controlUI.appendChild(btn1);
 			controlUI.appendChild(btn2);
+			controlUI.appendChild(btn3);
 			controlDiv.appendChild(controlUI);
 
 			var freeParkingImg = {
@@ -102,8 +110,34 @@
 			btn2.addEventListener('click', function() {
 				freeParkingMarker.setMap(map);
 			});
-		 
 
+			var directionsDisplay = new google.maps.DirectionsRenderer;
+  			var directionsService = new google.maps.DirectionsService;
+		 	directionsDisplay.setMap(map);
+		 	btn3.addEventListener('click', function() {
+				calculateAndDisplayRoute(directionsService,directionsDisplay);
+			});
+
+		}
+
+
+		function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+		  var selectedMode = 'WALKING';
+		  directionsService.route({
+		  	//25.081992, 121.674925
+		    origin: {lat: 25.078161, lng: 121.667407},  // Haight.
+		    destination: {lat: 25.081992, lng: 121.674925},  // Ocean Beach.
+		    // Note that Javascript allows us to access the constant
+		    // using square brackets and a string value as its
+		    // "property."
+		    travelMode: google.maps.TravelMode[selectedMode]
+		  }, function(response, status) {
+		    if (status == google.maps.DirectionsStatus.OK) {
+		      directionsDisplay.setDirections(response);
+		    } else {
+		      window.alert('Directions request failed due to ' + status);
+		    }
+		  });
 		}
     </script>
   </head>
