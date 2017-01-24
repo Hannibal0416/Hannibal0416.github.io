@@ -14,166 +14,302 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      var myHomeLocation = new google.maps.LatLng(25.081992, 121.674925);
-
-      var wudoStationLocation = new google.maps.LatLng(25.081992, 121.674925);
-      function initialize() {
-	    
-        var mapOptions = {
-          center: myHomeLocation,
-          zoom: 16
-        };
-		var myHomeImg = {
-				url:'img/myhome.png',
-				scaledSize: new google.maps.Size(32, 32),
-				origin: new google.maps.Point(0, 0),
-				anchor: new google.maps.Point(0, 32)
-			};
-		
-		
-        var map = new google.maps.Map(
-            document.getElementById('map-canvas'),
-            mapOptions);
-		
-		var marker = new google.maps.Marker({
-			position: myHomeLocation,
-			title: "舜家", 
-			map: map ,
-			animation: google.maps.Animation.BOUNCE,
-			icon: myHomeImg
-		});
-		
-		var infowindow = new google.maps.InfoWindow({
-			content: '舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b><br/><img src="img/myHome.jpg" width="200" height="150" />'
-		});
-		
-		marker.addListener('click', function() {
-			infowindow.open(map, marker);
-		});
-		
-		var customControlDiv = document.createElement('div');
-		var customControl = new CustomControl(customControlDiv, map);
-
-		customControlDiv.index = 1;
-		map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
-      }
-      google.maps.event.addDomListener(
-          window, 'load', initialize);
-		  
-		  
-	 // Create the DIV to hold the control and call the CustomControl() constructor passing in this DIV.
 	
-
-		function CustomControl(controlDiv, map) {
-		// Set CSS for the control border.
-			var controlUI = document.createElement('div');
-			var btn1 = document.createElement('button');
-			var btn2 = document.createElement('button');
-			var btn3 = document.createElement('button');
-			var nag
-			btn1.className = "btn btn-primary";
-			btn1.innerHTML = "收費停車場";
-			btn2.className = "btn btn-primary";
-			btn2.innerHTML = "免費停車場";
-			btn3.className = "btn btn-primary";
-			btn3.innerHTML = "導航到舜與小君家";
-			controlUI.appendChild(btn1);
-			controlUI.appendChild(btn2);
-			controlUI.appendChild(btn3);
-			controlDiv.appendChild(controlUI);
-
-			var freeParkingImg = {
-					url:'img/free-parking.png',
-					scaledSize: new google.maps.Size(48, 48),
-					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(0, 48)
+		$(document).ready(function() { 
+			var locations = {
+				myHome : new google.maps.LatLng(25.081992, 121.674925)
+				, wudoStation : new google.maps.LatLng(25.081992, 121.674925)
+			}
+		
+			var mapOptions = {
+			  center: locations.myHome,
+			  zoom: 16
 			};
-
-			var freeParkingMarker = new google.maps.Marker({
-				position: {lat: 25.082516, lng: 121.674596},
-				animation: google.maps.Animation.DROP,
-				icon: freeParkingImg
-			});
+			var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 			
-			var parkingImg = {
-					url:'img/parking.png',
+			var icons = {
+				myHome : {
+					url:'img/myhome.png',
 					scaledSize: new google.maps.Size(32, 32),
 					origin: new google.maps.Point(0, 0),
 					anchor: new google.maps.Point(0, 32)
-			};
-
-			var parkingMarker = new google.maps.Marker({
-				position: {lat: 25.077805, lng: 121.667603},
-				animation: google.maps.Animation.DROP,
-				icon: parkingImg
-			});
+				}
+				, freeParking : {
+						url:'img/free-parking.png',
+						scaledSize: new google.maps.Size(48, 48),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(0, 48)
+				}
+				, parking : {
+						url:'img/parking.png',
+						scaledSize: new google.maps.Size(32, 32),
+						origin: new google.maps.Point(0, 0),
+						anchor: new google.maps.Point(0, 32)
+				}
+			}
 			
-			btn1.addEventListener('click', function() {
-				parkingMarker.setMap(map);
-			});
-		 
-			btn2.addEventListener('click', function() {
-				freeParkingMarker.setMap(map);
-			});
+			var imgs = {
+				myHome : 'img/myHome.jpg'
+				, freeParking : 'img/freeParking.jpg'
+				, parking : 'img/parking.jpg'
+				, toWalkFromWuDuToMyHome : ['img/toWalkFromWuDuToMyHome1.jpg','img/toWalkFromWuDuToMyHome2.jpg','img/toWalkFromWuDuToMyHome3.jpg','img/toWalkFromWuDuToMyHome4.jpg']
+				, toWalkFromWuDuToFreeParking : ['img/toWalkFromWuDuToFreeParking1.jpg','img/toWalkFromWuDuToFreeParking2.jpg','img/toWalkFromWuDuToFreeParking3.jpg','img/toWalkFromWuDuToFreeParking4.jpg']
+			}
+			var markers = {
+				myHome : new google.maps.Marker({
+					position: locations.myHome,
+					title: "舜家", 
+					map: map ,
+					animation: google.maps.Animation.BOUNCE,
+					icon: icons.myHome
+				})
+				, freeParking : new google.maps.Marker({
+					position: {lat: 25.082516, lng: 121.674596},
+					animation: google.maps.Animation.DROP,
+					icon: icons.freeParking
+				})
+				, parking : new google.maps.Marker({
+					position: {lat: 25.078161, lng: 121.667407},
+					animation: google.maps.Animation.DROP,
+					icon: icons.parking
+				})
+				, toWalkFromWuDuToMyHome : [ new google.maps.Marker({
+						position: {lat:25.079209, lng:121.669320},
+						label: "1", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat:25.078956, lng:121.669642},
+						label: "2", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat:25.080723, lng:121.672151},
+						label: "3", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat:25.082100, lng:121.674885},
+						label: "4", 
+						animation: google.maps.Animation.DROP
+					})
+				]
+				, toWalkFromWuDuToFreeParking : [ new google.maps.Marker({
+						position: {lat:25.079209, lng:121.669320},
+						label: "1", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat:25.078956, lng:121.669642},
+						label: "2", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat:25.080723, lng:121.672151},
+						label: "3", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat: 25.082516, lng: 121.674596},
+						label: "4", 
+						animation: google.maps.Animation.DROP
+					})
+				]
+			};
+			var info = {
+				myHome : '舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b><br/><img src="' + imgs.myHome + '" width="200" height="150" />'
+				, freeParking: '路邊白線停車<br/><img src="' + imgs.freeParking + '" width="200" height="150" />'
+				, parking : '火車站下的收費停車場：12小時80元<br/><img src="' + imgs.parking + '" width="200" height="150" />'
+				, toWalkFromWuDuToMyHome : [
+						'1.鄉長路一段看到紅綠燈右轉<br/><img src="' + imgs.toWalkFromWuDuToMyHome[0] + '" width="200" height="150" />'
+						,'2.馬上左轉進小巷小(路窄小心對向車<br/><img src="' + imgs.toWalkFromWuDuToMyHome[1] + '" width="200" height="150" />'
+						,'3.走到Y字路口靠左邊(走高架鐵軌下方)<br/><img src="' + imgs.toWalkFromWuDuToMyHome[2] + '" width="200" height="150" />'
+						,'4.走到盡頭右轉<br/><img src="' + imgs.toWalkFromWuDuToMyHome[3] + '" width="200" height="150" />'
+					]
+				, toWalkFromWuDuToFreeParking : [
+						'1.鄉長路一段看到紅綠燈右轉<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[0] + '" width="200" height="150" />'
+						,'2.馬上左轉進小巷小(路窄小心對向車<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[1] + '" width="200" height="150" />'
+						,'3.走到Y字路口靠左邊(走高架鐵軌下方)<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[2] + '" width="200" height="150" />'
+						,'4.走到盡頭看到涵洞左轉<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[3] + '" width="200" height="150" />'
+					]
+			}
+			var infowindow = new google.maps.InfoWindow();
 
-			var directionsDisplay = new google.maps.DirectionsRenderer;
-  			var directionsService = new google.maps.DirectionsService;
-		 	directionsDisplay.setMap(map);
-		 	btn3.addEventListener('click', function() {
-				calculateAndDisplayRoute(directionsService,directionsDisplay,map);
-			});
+			function initialize() {
 
-		}
+				//setEventOfMarkers
+				markers.myHome.addListener('click', function() {
+					infowindow.setContent(info.myHome);
+					infowindow.open(map, markers.myHome);
+				});
+				markers.freeParking.addListener('click', function() {
+					infowindow.setContent(info.freeParking);
+					infowindow.open(map, markers.freeParking);
+				});
+				markers.parking.addListener('click', function() {
+					infowindow.setContent(info.parking);
+					infowindow.open(map, markers.parking);
+				});
+				for(var i = 0 ; i < markers.toWalkFromWuDuToMyHome.length ; i++ ) {
+					(function(index) {
+						markers.toWalkFromWuDuToMyHome[index].addListener('click', function() {
+							infowindow.setContent(info.toWalkFromWuDuToMyHome[index]);
+							infowindow.open(map, markers.toWalkFromWuDuToMyHome[index]);
+						});
+					})(i);
+				}
+				
+				for(var i = 0 ; i < markers.toWalkFromWuDuToFreeParking.length ; i++ ) {
+				
+					(function(index) {
+						markers.toWalkFromWuDuToFreeParking[index].addListener('click', function() {
+							infowindow.setContent(info.toWalkFromWuDuToFreeParking[index]);
+							infowindow.open(map, markers.toWalkFromWuDuToFreeParking[index]);
+						});
+					})(i);
+					
+				}
+				
+				var customControlDiv = document.createElement('div');
+				var customControl = new CustomControl(customControlDiv, map);
+				customControlDiv.index = 1;
+				map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
+			}
+			google.maps.event.addDomListener( window, 'load', initialize);
 
+			function CustomControl(controlDiv, map) {
+				var controlUI = document.createElement('div');
+				var btn1 = document.createElement('button');
+				var btn2 = document.createElement('button');
+				var btn3 = document.createElement('button');
+				var btn4 = document.createElement('button');
+				btn1.className = "btn btn-primary";
+				btn1.innerHTML = "附近收費停車場";
+				btn2.className = "btn btn-primary";
+				btn2.innerHTML = "附近路邊白線停車";
+				btn3.className = "btn btn-primary";
+				btn3.innerHTML = "從車站導航到舜與小君家";
+				btn4.className = "btn btn-primary";
+				btn4.innerHTML = "從車站導航到路邊白線停車";
+				controlUI.appendChild(btn1);
+				controlUI.appendChild(btn2);
+				controlUI.appendChild(btn3);
+				controlUI.appendChild(btn4);
+				controlDiv.appendChild(controlUI);
+				
+				btn1.addEventListener('click', function() {
+					markers.parking.setAnimation(null);
+					markers.parking.setMap(null);
+					markers.parking.setAnimation(google.maps.Animation.DROP);
+					markers.parking.setMap(map);
+				});
+			 
+				btn2.addEventListener('click', function() {
+					markers.freeParking.setAnimation(null);
+					markers.freeParking.setMap(null);
+					markers.freeParking.setAnimation(google.maps.Animation.DROP);
+					markers.freeParking.setMap(map);
+				});
+				var directionsDisplay = new google.maps.DirectionsRenderer;
+				var directionsService = new google.maps.DirectionsService;
+				directionsDisplay.setMap(map);
+				btn3.addEventListener('click', function() {
+					calculateAndDisplayRouteToMyHome(directionsService,directionsDisplay,map);
+				});
+				
+				btn4.addEventListener('click', function() {
+					calculateAndDisplayRouteToFreeParking(directionsService,directionsDisplay,map);
+				});
+				
+				
+			}
+			function calculateAndDisplayRouteToMyHome(directionsService, directionsDisplay,map) {
 
-		function calculateAndDisplayRoute(directionsService, directionsDisplay,map) {
-			var markerArr  = [ new google.maps.Marker({
-					position: {lat:25.079209, lng:121.669320},
-					title: "1", 
-					animation: google.maps.Animation.BOUNCE
-				}),
-		    	new google.maps.Marker({
-					position: {lat:25.078956, lng:121.669642},
-					title: "2", 
-					animation: google.maps.Animation.BOUNCE
-				}),
-				new google.maps.Marker({
-					position: {lat:25.080723, lng:121.672151},
-					title: "3", 
-					animation: google.maps.Animation.BOUNCE
-				}),
-				new google.maps.Marker({
-					position: {lat:25.082100, lng:121.674885},
-					title: "4", 
-					animation: google.maps.Animation.BOUNCE
-				})];
-		  var selectedMode = 'WALKING';
-		  directionsService.route({
-		  	//25.081992, 121.674925
-		    origin: {lat: 25.078161, lng: 121.667407},  // Haight.
-		    destination: {lat: 25.081992, lng: 121.674925},  // Ocean Beach.
-		    // Note that Javascript allows us to access the constant
-		    // using square brackets and a string value as its
-		    // "property."
-		    travelMode: google.maps.TravelMode[selectedMode]
-		  }, function(response, status) {
-		    if (status == google.maps.DirectionsStatus.OK) {
-		      directionsDisplay.setDirections(response);	
-		      for (var i =0; i < markerArr.length; i++) {
-			    setTimeout(function() {
-			      markerArr[i].setMap(map);
-			    }, i * 200);
-			  }
-		    } else {
-		      window.alert('Directions request failed due to ' + status);
-		    }
-		  });
+				var selectedMode = 'WALKING';
+				directionsService.route({
+						origin: {lat: 25.078161, lng: 121.667407},  
+						destination: {lat: 25.081992, lng: 121.674925},  
+						travelMode: google.maps.TravelMode[selectedMode]
+					}, function(response, status) {
+						if (status == google.maps.DirectionsStatus.OK) {
+							directionsDisplay.setDirections(response);	
+							removeToWalkFromWuDuToMyHomeMarkers();
+							removeToWalkFromWuDuToFreeParkingMarkers();
+							for (var i =0; i < markers.toWalkFromWuDuToMyHome.length; i++) {
+								setTimeout(function() {
+									addToWalkFromWuDuToMyHomeMarkers();
+								}, 500 * i);
+							}
+						} else {
+							window.alert('Directions request failed due to ' + status);
+						}
+				});
+			}
+			
+			function calculateAndDisplayRouteToFreeParking(directionsService, directionsDisplay,map) {
 
-
-		}
-
-
-
+				var selectedMode = 'WALKING';
+				directionsService.route({
+						origin: {lat: 25.078161, lng: 121.667407},  
+						destination: {lat:25.082118, lng:121.674807},  
+						travelMode: google.maps.TravelMode[selectedMode]
+					}, function(response, status) {
+						if (status == google.maps.DirectionsStatus.OK) {
+							directionsDisplay.setDirections(response);
+							removeToWalkFromWuDuToMyHomeMarkers();
+							removeToWalkFromWuDuToFreeParkingMarkers();
+							for (var i =0; i < markers.toWalkFromWuDuToFreeParking.length; i++) {
+								setTimeout(function() {
+									addToWalkFromWuDuToFreeParkingMarkers();
+								}, 500 * i);
+							}
+						} else {
+							window.alert('Directions request failed due to ' + status);
+						}
+				});
+			}
+			
+			function removeToWalkFromWuDuToMyHomeMarkers() {
+				for (var i =0; i < markers.toWalkFromWuDuToMyHome.length; i++) {
+					if(markers.toWalkFromWuDuToMyHome[i].getMap() != undefined || markers.toWalkFromWuDuToMyHome[i].getMap() != null) {
+						markers.toWalkFromWuDuToMyHome[i].setAnimation(null);
+						markers.toWalkFromWuDuToMyHome[i].setMap(null);
+					}
+				}
+			}
+			
+			function addToWalkFromWuDuToMyHomeMarkers() {
+				for (var i =0; i < markers.toWalkFromWuDuToMyHome.length; i++) {
+					if(markers.toWalkFromWuDuToMyHome[i].getMap() == undefined || markers.toWalkFromWuDuToMyHome[i].getMap() == null) {
+						markers.toWalkFromWuDuToMyHome[i].setAnimation(google.maps.Animation.DROP);
+						markers.toWalkFromWuDuToMyHome[i].setMap(map);
+						break;
+					}
+				}
+			}
+			
+			function removeToWalkFromWuDuToFreeParkingMarkers() {
+				for (var i =0; i < markers.toWalkFromWuDuToFreeParking.length; i++) {
+					if(markers.toWalkFromWuDuToFreeParking[i].getMap() != undefined || markers.toWalkFromWuDuToFreeParking[i].getMap() != null) {
+						markers.toWalkFromWuDuToFreeParking[i].setAnimation(null);
+						markers.toWalkFromWuDuToFreeParking[i].setMap(null);
+					}
+				}
+			}
+			
+			function addToWalkFromWuDuToFreeParkingMarkers() {
+				for (var i =0; i < markers.toWalkFromWuDuToFreeParking.length; i++) {
+					if(markers.toWalkFromWuDuToFreeParking[i].getMap() == undefined || markers.toWalkFromWuDuToFreeParking[i].getMap() == null) {
+						markers.toWalkFromWuDuToFreeParking[i].setAnimation(google.maps.Animation.DROP);
+						markers.toWalkFromWuDuToFreeParking[i].setMap(map);
+						break;
+					}
+				}
+			}
+		
+		});
+	
+		
     </script>
   </head>
   <body>
