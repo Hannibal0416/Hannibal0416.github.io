@@ -197,9 +197,10 @@
 				btn3.innerHTML = "<h3>從車站到舜與小君家</h2>";
 				btn4.className = "btn btn-primary";
 				btn4.innerHTML = "<h3>從車站到路邊白線停車</h2>";
+				controlUI.appendChild(document.createElement('br'));
+				controlUI.appendChild(document.createElement('br'));
 				controlUI.appendChild(btn1);
 				controlUI.appendChild(btn2);
-				//controlUI.appendChild(document.createElement('br'));
 				controlUI.appendChild(btn3);
 				controlUI.appendChild(btn4);
 				controlDiv.appendChild(controlUI);
@@ -209,6 +210,8 @@
 					markers.parking.setMap(null);
 					markers.parking.setAnimation(google.maps.Animation.DROP);
 					markers.parking.setMap(map);
+					infowindow.setContent(info.parking);
+					infowindow.open(map, markers.parking);
 				});
 			 
 				btn2.addEventListener('click', function() {
@@ -216,6 +219,8 @@
 					markers.freeParking.setMap(null);
 					markers.freeParking.setAnimation(google.maps.Animation.DROP);
 					markers.freeParking.setMap(map);
+					infowindow.setContent(info.freeParking);
+					infowindow.open(map, markers.freeParking);
 				});
 				var directionsDisplay = new google.maps.DirectionsRenderer;
 				var directionsService = new google.maps.DirectionsService;
