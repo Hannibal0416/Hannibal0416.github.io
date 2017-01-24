@@ -171,28 +171,29 @@
 				}
 				
 				var customControlDiv = document.createElement('div');
-				var customControl = new CustomControl(customControlDiv, map);
-				customControlDiv.index = 1;
+				customControl(document.getElementById('controlDiv'), map);
+				//customControlDiv.index = 1;
 				map.controls[google.maps.ControlPosition.TOP_CENTER].push(customControlDiv);
 			}
 			google.maps.event.addDomListener( window, 'load', initialize);
 
-			function CustomControl(controlDiv, map) {
+			function customControl(controlDiv, map) {
 				var controlUI = document.createElement('div');
 				var btn1 = document.createElement('button');
 				var btn2 = document.createElement('button');
 				var btn3 = document.createElement('button');
 				var btn4 = document.createElement('button');
 				btn1.className = "btn btn-primary";
-				btn1.innerHTML = "附近收費停車場";
+				btn1.innerHTML = "<h1>附近收費停車場</h1>";
 				btn2.className = "btn btn-primary";
-				btn2.innerHTML = "附近路邊白線停車";
+				btn2.innerHTML = "<h1>附近路邊白線停車</h1>";
 				btn3.className = "btn btn-primary";
-				btn3.innerHTML = "從車站導航到舜與小君家";
+				btn3.innerHTML = "<h1>從車站導航到舜與小君家</h1>";
 				btn4.className = "btn btn-primary";
-				btn4.innerHTML = "從車站導航到路邊白線停車";
+				btn4.innerHTML = "<h1>從車站導航到路邊白線停車</h1>";
 				controlUI.appendChild(btn1);
 				controlUI.appendChild(btn2);
+				controlUI.appendChild(document.createElement('br'));
 				controlUI.appendChild(btn3);
 				controlUI.appendChild(btn4);
 				controlDiv.appendChild(controlUI);
@@ -313,6 +314,7 @@
     </script>
   </head>
   <body>
+  <div id="controlDiv" align="center"></div> 
 <div id="map-canvas"></div>
   </body>
 </html>
