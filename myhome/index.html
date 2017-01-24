@@ -14,8 +14,11 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-	
+		
 		$(document).ready(function() { 
+			var width = document.getElementById("map-canvas").offsetWidth / 15;
+			var infoWidth = document.getElementById("map-canvas").offsetWidth / 4;
+			var infoHeight = document.getElementById("map-canvas").offsetHeight / 4;
 			var locations = {
 				myHome : new google.maps.LatLng(25.081992, 121.674925)
 				, wudoStation : new google.maps.LatLng(25.081992, 121.674925)
@@ -23,28 +26,30 @@
 		
 			var mapOptions = {
 			  center: locations.myHome,
-			  zoom: 16
+			  zoom: 16,
+			  zoomControl: true,
+			  scaleControl: true
 			};
 			var map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 			
 			var icons = {
 				myHome : {
 					url:'img/myhome.png',
-					scaledSize: new google.maps.Size(32, 32),
+					scaledSize: new google.maps.Size(width, width),
 					origin: new google.maps.Point(0, 0),
-					anchor: new google.maps.Point(0, 32)
+					anchor: new google.maps.Point(0, width)
 				}
 				, freeParking : {
 						url:'img/free-parking.png',
-						scaledSize: new google.maps.Size(48, 48),
+						scaledSize: new google.maps.Size(width, width),
 						origin: new google.maps.Point(0, 0),
-						anchor: new google.maps.Point(0, 48)
+						anchor: new google.maps.Point(0, width)
 				}
 				, parking : {
 						url:'img/parking.png',
-						scaledSize: new google.maps.Size(32, 32),
+						scaledSize: new google.maps.Size(width, width),
 						origin: new google.maps.Point(0, 0),
-						anchor: new google.maps.Point(0, 32)
+						anchor: new google.maps.Point(0, width)
 				}
 			}
 			
@@ -117,20 +122,20 @@
 				]
 			};
 			var info = {
-				myHome : '舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b><br/><img src="' + imgs.myHome + '" width="200" height="150" />'
-				, freeParking: '路邊白線停車<br/><img src="' + imgs.freeParking + '" width="200" height="150" />'
-				, parking : '火車站下的收費停車場：12小時80元<br/><img src="' + imgs.parking + '" width="200" height="150" />'
+				myHome : '<h4>舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b></h4><br/><img src="' + imgs.myHome + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+				, freeParking: '<h4>路邊白線停車</h4><br/><img src="' + imgs.freeParking + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+				, parking : '<h4>火車站下的收費停車場：12小時80元</h4><br/><img src="' + imgs.parking + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 				, toWalkFromWuDuToMyHome : [
-						'1.鄉長路一段看到紅綠燈右轉<br/><img src="' + imgs.toWalkFromWuDuToMyHome[0] + '" width="200" height="150" />'
-						,'2.馬上左轉進小巷小(路窄小心對向車<br/><img src="' + imgs.toWalkFromWuDuToMyHome[1] + '" width="200" height="150" />'
-						,'3.走到Y字路口靠左邊(走高架鐵軌下方)<br/><img src="' + imgs.toWalkFromWuDuToMyHome[2] + '" width="200" height="150" />'
-						,'4.走到盡頭右轉<br/><img src="' + imgs.toWalkFromWuDuToMyHome[3] + '" width="200" height="150" />'
+						'<h4>1.鄉長路一段看到紅綠燈右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[0] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>2.馬上左轉進小巷小(路窄小心對向車</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[1] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[2] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>4.走到盡頭右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[3] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 					]
 				, toWalkFromWuDuToFreeParking : [
-						'1.鄉長路一段看到紅綠燈右轉<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[0] + '" width="200" height="150" />'
-						,'2.馬上左轉進小巷小(路窄小心對向車<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[1] + '" width="200" height="150" />'
-						,'3.走到Y字路口靠左邊(走高架鐵軌下方)<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[2] + '" width="200" height="150" />'
-						,'4.走到盡頭看到涵洞左轉<br/><img src="' + imgs.toWalkFromWuDuToFreeParking[3] + '" width="200" height="150" />'
+						'<h4>1.鄉長路一段看到紅綠燈右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[0] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>2.馬上左轉進小巷小(路窄小心對向車</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[1] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[2] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+						,'<h4>4.走到盡頭看到涵洞左轉</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[3] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 					]
 			}
 			var infowindow = new google.maps.InfoWindow();
@@ -185,13 +190,13 @@
 				var btn3 = document.createElement('button');
 				var btn4 = document.createElement('button');
 				btn1.className = "btn btn-primary";
-				btn1.innerHTML = "<h2>附近收費停車場</h2>";
+				btn1.innerHTML = "<h3>附近收費停車場</h2>";
 				btn2.className = "btn btn-primary";
-				btn2.innerHTML = "<h2>附近路邊白線停車</h2>";
+				btn2.innerHTML = "<h3>附近路邊白線停車</h2>";
 				btn3.className = "btn btn-primary";
-				btn3.innerHTML = "<h2>從車站導航到舜與小君家</h2>";
+				btn3.innerHTML = "<h3>從車站到舜與小君家</h2>";
 				btn4.className = "btn btn-primary";
-				btn4.innerHTML = "<h2>從車站導航到路邊白線停車</h2>";
+				btn4.innerHTML = "<h3>從車站到路邊白線停車</h2>";
 				controlUI.appendChild(btn1);
 				controlUI.appendChild(btn2);
 				//controlUI.appendChild(document.createElement('br'));
