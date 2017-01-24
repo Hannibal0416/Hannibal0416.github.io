@@ -211,7 +211,11 @@
 					markers.parking.setAnimation(google.maps.Animation.DROP);
 					markers.parking.setMap(map);
 					infowindow.setContent(info.parking);
-					infowindow.open(map, markers.parking);
+					setTimeout(function() {
+									infowindow.open(map, markers.parking);
+								}, 1000);
+					
+					map.setCenter({lat: 25.078161, lng: 121.667407});
 				});
 			 
 				btn2.addEventListener('click', function() {
@@ -220,7 +224,10 @@
 					markers.freeParking.setAnimation(google.maps.Animation.DROP);
 					markers.freeParking.setMap(map);
 					infowindow.setContent(info.freeParking);
-					infowindow.open(map, markers.freeParking);
+					setTimeout(function() {
+									infowindow.open(map, markers.freeParking);
+								}, 1000);
+					map.setCenter({lat: 25.082516, lng: 121.674596});
 				});
 				var directionsDisplay = new google.maps.DirectionsRenderer;
 				var directionsService = new google.maps.DirectionsService;
@@ -250,7 +257,7 @@
 							for (var i =0; i < markers.toWalkFromWuDuToMyHome.length; i++) {
 								setTimeout(function() {
 									addToWalkFromWuDuToMyHomeMarkers();
-								}, 500 * i);
+								}, 4000 * i);
 							}
 						} else {
 							window.alert('Directions request failed due to ' + status);
@@ -273,7 +280,7 @@
 							for (var i =0; i < markers.toWalkFromWuDuToFreeParking.length; i++) {
 								setTimeout(function() {
 									addToWalkFromWuDuToFreeParkingMarkers();
-								}, 500 * i);
+								}, 4000 * i);
 							}
 						} else {
 							window.alert('Directions request failed due to ' + status);
@@ -295,6 +302,8 @@
 					if(markers.toWalkFromWuDuToMyHome[i].getMap() == undefined || markers.toWalkFromWuDuToMyHome[i].getMap() == null) {
 						markers.toWalkFromWuDuToMyHome[i].setAnimation(google.maps.Animation.DROP);
 						markers.toWalkFromWuDuToMyHome[i].setMap(map);
+						infowindow.setContent(info.toWalkFromWuDuToMyHome[i]);
+						infowindow.open(map, markers.toWalkFromWuDuToMyHome[i]);
 						break;
 					}
 				}
@@ -314,6 +323,8 @@
 					if(markers.toWalkFromWuDuToFreeParking[i].getMap() == undefined || markers.toWalkFromWuDuToFreeParking[i].getMap() == null) {
 						markers.toWalkFromWuDuToFreeParking[i].setAnimation(google.maps.Animation.DROP);
 						markers.toWalkFromWuDuToFreeParking[i].setMap(map);
+						infowindow.setContent(info.toWalkFromWuDuToFreeParking[i]);
+						infowindow.open(map, markers.toWalkFromWuDuToFreeParking[i]);
 						break;
 					}
 				}
