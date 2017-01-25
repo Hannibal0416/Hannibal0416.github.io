@@ -16,9 +16,10 @@
     <script type="text/javascript">
 		
 		$(document).ready(function() { 
-			var width = document.getElementById("map-canvas").offsetWidth / 15;
+			var width = document.getElementById("map-canvas").offsetWidth / 13;
 			var infoWidth = document.getElementById("map-canvas").offsetWidth / 4;
 			var infoHeight = document.getElementById("map-canvas").offsetHeight / 4;
+			var showImg = infoWidth > infoHeight? infoWidth : infoHeight;
 			var locations = {
 				myHome : new google.maps.LatLng(25.081992, 121.674925)
 				, wudoStation : new google.maps.LatLng(25.081992, 121.674925)
@@ -52,13 +53,20 @@
 						anchor: new google.maps.Point(0, width)
 				}
 			}
-			
+			/*
 			var imgs = {
 				myHome : 'img/myHome.jpg'
 				, freeParking : 'img/freeParking.jpg'
 				, parking : 'img/parking.jpg'
 				, toWalkFromWuDuToMyHome : ['img/toWalkFromWuDuToMyHome1.jpg','img/toWalkFromWuDuToMyHome2.jpg','img/toWalkFromWuDuToMyHome3.jpg','img/toWalkFromWuDuToMyHome4.jpg']
-				, toWalkFromWuDuToFreeParking : ['img/toWalkFromWuDuToFreeParking1.jpg','img/toWalkFromWuDuToFreeParking2.jpg','img/toWalkFromWuDuToFreeParking3.jpg','img/toWalkFromWuDuToFreeParking4.jpg']
+				, toWalkFromWuDuToFreeParking : ['img/toWalkFromWuDuToFreeParking1.jpg','img/toWalkFromWuDuToFreeParking2.jpg','img/toWalkFromWuDuToFreeParking3.jpg','img/toWalkFromWuDuToFreeParking4.jpg','img/toWalkFromWuDuToFreeParking5.jpg']
+			}*/
+			var imgs = {
+				myHome : 'https://dl.dropboxusercontent.com/content_link/cZBqxxpPX8g7unUBEqEYMFnCZ5cnlnzlFnFjtbsyKVfu5mxJaxJkke7neC2hY8p6/file'
+				, freeParking : 'https://dl.dropboxusercontent.com/content_link/SkToS4EbnffOj6BSUFhXvD3x9HRI0goH8L24gIgP642v2uxKiwBL7qSGTQxC4d5a/file'
+				, parking : 'https://dl.dropboxusercontent.com/content_link/H8nsiCxbNZlYpTjq2yyvR8QQw1ZTwwCmP9hlDzq4Kutaxe9fPAxyTJmFmo305wxX/file'
+				, toWalkFromWuDuToMyHome : ['https://dl.dropboxusercontent.com/content_link/E0r7aMpiVEbpthJXHDzZdhUNuq2VqR36DUw04SiemRi54d84Vdl4c3RTxUVhIy9I/file','https://dl.dropboxusercontent.com/content_link/AacMnSlkcafqxilrzXUL85xcFTuqJqwKwmOJTIBqcz6vkQx14fV4ibldJmMsoSGi/file','https://dl.dropboxusercontent.com/content_link/qmXtErMVTWKOyqAsKBYJqMbg8sY2pZjtZ9sC6XYXS0mKvcEdXUhih0opne4toJM2/file','https://dl.dropboxusercontent.com/content_link/qJ0gzjGtPyW2qhidHeWJPHilEXXbKxExsu0Y1WwxkA1Yxf1wAsHvhZSiQxb6y8jh/file']
+				, toWalkFromWuDuToFreeParking : ['https://dl.dropboxusercontent.com/content_link/E0r7aMpiVEbpthJXHDzZdhUNuq2VqR36DUw04SiemRi54d84Vdl4c3RTxUVhIy9I/file','https://dl.dropboxusercontent.com/content_link/AacMnSlkcafqxilrzXUL85xcFTuqJqwKwmOJTIBqcz6vkQx14fV4ibldJmMsoSGi/file','https://dl.dropboxusercontent.com/content_link/qmXtErMVTWKOyqAsKBYJqMbg8sY2pZjtZ9sC6XYXS0mKvcEdXUhih0opne4toJM2/file','https://dl.dropboxusercontent.com/content_link/0lcBrxBGw7SD5hmED6W3JIjoa5CoOmuxI9NkREtDheNiKd0iJ44ztl3YCIOJsdA9/file','https://dl.dropboxusercontent.com/content_link/SkToS4EbnffOj6BSUFhXvD3x9HRI0goH8L24gIgP642v2uxKiwBL7qSGTQxC4d5a/file']
 			}
 			var markers = {
 				myHome : new google.maps.Marker({
@@ -115,17 +123,37 @@
 						animation: google.maps.Animation.DROP
 					}),
 					new google.maps.Marker({
-						position: {lat: 25.082516, lng: 121.674596},
+						position: {lat: 25.082132, lng: 121.674689},
 						label: "4", 
+						animation: google.maps.Animation.DROP
+					}),
+					new google.maps.Marker({
+						position: {lat: 25.082516, lng: 121.674596},
+						label: "5", 
 						animation: google.maps.Animation.DROP
 					})
 				]
 			};
+			
+
 			var info = {
-				myHome : '<h4>舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b></h4><br/><img src="' + imgs.myHome + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
-				, freeParking: '<h4>路邊白線停車</h4><br/><img src="' + imgs.freeParking + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
-				, parking : '<h4>火車站下的收費停車場：12小時80元</h4><br/><img src="' + imgs.parking + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
+				myHome : '<h4>舜&小君家地址：<b>新北市汐止區長興街二段56號5樓之3</b></h4><br/><img src="' + imgs.myHome + '" width="'+ showImg + '" height="'+showImg+'" />'
+				, freeParking: '<h4>路邊白線停車</h4><br/><img src="' + imgs.freeParking + '" width="'+ showImg + '" height="'+showImg+'" />'
+				, parking : '<h4>火車站下的收費停車場：12小時80元</h4><br/><img src="' + imgs.parking + '" width="'+ showImg + '" height="'+showImg+'" />'
 				, toWalkFromWuDuToMyHome : [
+						'<h4>1.鄉長路一段看到紅綠燈右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[0] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>2.馬上左轉進小巷(巷子小路窄小心對向車)</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[1] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[2] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>4.走到盡頭右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[3] + '" width="'+ showImg + '" height="'+showImg+'" />'
+					]
+				, toWalkFromWuDuToFreeParking : [
+						'<h4>1.鄉長路一段看到紅綠燈右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[0] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>2.馬上左轉進小巷小(路窄小心對向車</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[1] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[2] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>4.走到盡頭看到涵洞順著路左轉進涵洞</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[3] + '" width="'+ showImg + '" height="'+showImg+'" />'
+						,'<h4>5.照片左邊的路皆是白線</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[4] + '" width="'+ showImg + '" height="'+showImg+'" />'
+					]
+				/*, toWalkFromWuDuToMyHome : [
 						'<h4>1.鄉長路一段看到紅綠燈右轉</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[0] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 						,'<h4>2.馬上左轉進小巷小(路窄小心對向車</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[1] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToMyHome[2] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
@@ -136,7 +164,7 @@
 						,'<h4>2.馬上左轉進小巷小(路窄小心對向車</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[1] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 						,'<h4>3.走到Y字路口靠左邊(走高架鐵軌下方)</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[2] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
 						,'<h4>4.走到盡頭看到涵洞左轉</h4><br/><img src="' + imgs.toWalkFromWuDuToFreeParking[3] + '" width="'+ infoWidth + '" height="'+infoHeight+'" />'
-					]
+					]*/
 			}
 			var infowindow = new google.maps.InfoWindow();
 
