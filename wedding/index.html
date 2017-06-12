@@ -1,0 +1,652 @@
+<html>
+<meta charset="utf-8" />
+<meta property="og:title" content="文舜與丞君的婚宴邀請"></meta>
+<meta property="og:type" content="婚宴邀請"></meta>
+<meta property="og:url" content="wedding"></meta>
+<meta property="og:image" content="img/wedding.png"></meta>
+<meta property="og:description" content="文舜與丞君的婚宴邀請"></meta>
+<meta property="og:site_name" content="文舜與丞君的婚宴邀請"></meta>
+<head>
+<title>文舜與丞君的婚宴邀請</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
+<link rel="stylesheet" type="text/css" href="css/jquery.fullpage.min.css">
+<!-- 	<link rel="stylesheet" type="text/css" href="css/jquery.fancybox.min.css"> -->
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.fullpage.min.js"></script>
+<script type="text/javascript" src="js/jquery.fullpage.extensions.min.js"></script>
+<script type="text/javascript" src="js/anim.js"></script>
+<script type="text/javascript" src="js/rellax.min.js"></script>
+<script type="text/javascript" src="js/anime.min.js"></script>
+<script type="text/javascript" src="js/progressbar.min.js"></script>
+<!-- <script type="text/javascript" src="js/jquery.fancybox.min.js"></script> -->
+<style type="text/css">
+/* #section1, #section2 { */
+/*     background-size: cover; */
+/*     background-repeat: no-repeat; */
+/*     background-position: center center; */
+/*   	background-image: url(img/se0.jpg);  */
+/*   	opacity: 0.2;  */
+/*   	filter: alpha(opacity=20); */
+/* 	padding: 30% 0 0 0; */
+/* } */
+@font-face {
+  font-family: 'cwTeXYen';
+  font-style: normal;
+  font-weight: 500;
+  src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot);
+  src: url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.eot?#iefix) format('embedded-opentype'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff2) format('woff2'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.woff) format('woff'),
+       url(//fonts.gstatic.com/ea/cwtexyen/v3/cwTeXYen-zhonly.ttf) format('truetype');
+}
+
+/* all */
+/*.form-control::-webkit-input-placeholder { color:#ecf2e1; font-size:20px;}
+.form-control::-moz-placeholder { color:#ecf2e1; font-size:20px;}  
+.form-control:-ms-input-placeholder { color:#ecf2e1; font-size:20px; }   */
+
+body {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  	background-image: url(img/se0.jpg); 
+  	background-attachment: fixed;
+  	font-family: cwTeXYen;
+/*   	opacity: 0.2;  */
+/*   	filter: alpha(opacity=20); */
+/* 	padding: 30% 0 0 0; */
+}
+input {
+    font-size: 16px !important;
+}
+
+input[type="text"] , input[type="email"],input[type="number"]
+{
+    background-color: rgba(0, 0, 0, 0.5);
+    border-color: #5bc0de;
+}
+h1 {
+    font-size: 40px;
+    font-weight: bold;
+    color : white;
+    
+}
+
+h2 {
+    font-size: 30px;
+    color : white;
+}
+h3 {
+	font-size: 20px;
+	color : white;
+}
+
+label { 
+	font-size: 30px !important;
+}
+#hannibal {
+	width:350px;
+	height:350px;
+	background-image: url('img/hannibal_.png');
+	background-size: 350px 350px;
+}
+#annie {
+	width:350px;
+	height:350px;
+	background-image: url('img/annie_.png');
+	background-size: 350px 350px;
+}
+#menu { margin: 0; padding: 0; position: fixed; left: 10px; top: 10px; list-style-type: none; z-index: 70;}
+#menu li { float: left; margin:  0 10px 0 0; font-size: 14px;}
+#menu a { float: left; padding: 10px 20px; background-color: #fff; color: #333; text-decoration: none;}
+#menu .active a { color: #fff; background-color: #333;}
+
+@media screen and (min-device-width: 320px) and (max-device-width: 736px) {
+	.center {
+		top: 30%;
+	}
+}
+
+.center {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+}
+.col-centered{
+    float: none;
+    margin: 0 auto;
+}
+.col-right{
+    float: right;
+    margin: 0 auto;
+}
+
+.col-left{
+    float: left;
+    margin: 0 auto;
+}
+
+</style>
+<script type="text/javascript">
+
+	var components = {
+			section1 : {
+				svg_path1: null,
+				svg_date1 : null
+			},
+			section2 : {
+				bridegroom: null,
+				bride: null
+			}
+	}
+	
+	var params = {
+        "name": null,
+        "email": null,
+        "friendBelongs": null,
+        "phone": null,
+        "address": null,
+        "church": false,
+        "weddingDinner": false,
+        "numberOfParticipants": null,
+        "childSeats": null,
+        "time": new Date().toLocaleString()
+      };
+	var sname = null;
+	$(document).ready( function() {
+				// var bar1 = new ProgressBar.Path('#ss', {
+				// 				  easing: 'easeInOut',
+				// 				  duration: 14000
+				// 				});
+// 				var title = document.getElementById('title');
+				
+// 				title.addEventListener('load', function() {
+// 					components.section1.svg_path1 = new ProgressBar.Path(title.contentDocument
+// 							.querySelector('#path_title'), {
+// 						duration : 10000
+// 					})
+// 					components.section1.svg_date1 = new ProgressBar.Path(title.contentDocument
+// 							.querySelector('#path_date'), {
+// 						duration : 10000
+// 					})
+// 					components.section1.svg_path1.set(0);
+// 					components.section1.svg_path1.animate(1.0);
+// 					components.section1.svg_date1.set(0);
+// 					components.section1.svg_date1.animate(1.0);
+// 				});
+				components.section1.svg_path1 = new ProgressBar.Path(document.querySelector('#path_title'), {
+					duration : 30000
+				})
+				components.section1.svg_date1 = new ProgressBar.Path(document.querySelector('#path_date'), {
+					duration : 30000
+				})
+				components.section1.svg_path1.set(0);
+				components.section1.svg_path1.animate(1.0);
+				components.section1.svg_date1.set(0);
+				components.section1.svg_date1.animate(1.0);
+				var mq = window.matchMedia( "(min-device-width: 320px) and (max-device-width: 736px)" );
+				var bridegroomX = mq.matches ?  340: 450;
+				var brideX = mq.matches? -240: -240;
+				components.section2.bridegroom = anime({
+					targets : document.getElementById('bridegroom'),
+					translateX : [ {
+						value : 0,
+						duration : 0
+					}, {
+						value : bridegroomX,
+						duration : 2000
+					} ],
+// 					translateX : '250',
+					easing: 'easeInOutQuart',
+// 					rotate : '1turn',
+					// 				  backgroundColor: '#FFF',
+					duration : 3000,
+					loop : false
+				});
+				
+				components.section2.bride = anime({
+					targets : document.getElementById('bride'),
+					translateX : [ {
+						value : 200,
+						duration : 0
+					}, {
+						value : brideX,
+						duration : 3000
+					} ],
+					complete: function(anim) {
+// 					    completedLogEl.value = 'completed : ' + anim.completed;
+						$('#ring').show();
+					},
+// 					rotate : '1turn'    ,
+					// 				  backgroundColor: '#FFF',
+// 					translateX: 250,
+// 				    scale: 2,
+// 					translateX : '-250',
+				    easing: 'easeInOutQuart',
+					duration : 2000,
+					loop : false
+				});
+				
+// 				var svgAttributes = anime({
+// 					  targets: document.querySelector('#svgAttributes polygon'),
+// 					  points: '64 128 8.574 96 8.574 32 64 0 119.426 32 119.426 96',
+// 					  easing: 'easeInOutExpo',
+// 					  loop : true
+// 					});
+		$('input:radio[name="friend-belongs"]').change(function(){
+	        if ($(this).is(':checked') && $(this).val() == 'hannibal') {
+	            $('#hannibal').css("background-image", "url('img/hannibal.png')");
+	            $('#annie').css("background-image", "url('img/annie_.png')");
+	        } else if ($(this).is(':checked') && $(this).val() == 'annie') {
+	        	$('#hannibal').css("background-image", "url('img/hannibal_.png')");
+	        	$('#annie').css("background-image", "url('img/annie.png')");
+	        } 
+	    });
+
+	    $('#name').blur(function(){
+	    	sname = $(this).val();
+		    if (sname.length == 3) {
+		    	sname = sname.substring(1,sname.length);			    
+		    } else if (name.length >= 3) {
+		    	sname = sname.substring(2,sname.length);
+			}
+		    $('span[specific-name]').each(function(){
+				this.innerHTML=sname;
+			});
+		});
+
+		$('#thanks').hide();
+		$('#postInfo').show();
+		
+	});
+	
+	$(document).ready( function() {
+		var a = $('#fullpage').fullpage({
+//				scrollingSpeed: 700,
+// 			autoScrolling: false,
+// 			resetSliders: false,
+//				fadingEffect: true,
+// 				scrollOverflowReset: false,
+// 			scrollBar: true,
+			verticalCentered: true,
+			navigation: true,
+			menu: '#menu',
+			navigationPosition: 'right',
+			navigationTooltips: ['一', '二', '三','四','五','六','七'],
+			afterLoad : function(anchorLink, index) {
+				
+				switch (index) {
+				case 1:
+					if ( components.section1.svg_path1 != null ) {
+						components.section1.svg_path1.set(0), components.section1.svg_path1.animate(1.0);
+						components.section1.svg_date1.set(0), components.section1.svg_date1.animate(1.0);
+					}
+					break;
+				case 2:
+					components.section2.bride.restart();
+					components.section2.bridegroom.restart();
+					$('#ring').hide();
+					break;
+				case 3:
+					break;
+				case 4:
+					break;
+				case 5:
+					params.church = $('input[name=church]:checked').val();
+					params.weddingDinner = $('input[name=wedding-dinner]:checked').val();
+					if (preIndex == 4) {
+						if(params.weddingDinner == "false" && params.church == "false" ) {
+							$.fn.fullpage.moveTo(7);
+						} 
+					}
+					break;
+				case 6:
+					if (preIndex == 5) {
+						if(params.weddingDinner == "false") {
+							$.fn.fullpage.moveTo(7);
+						}
+					}
+					break;
+				case 7:
+					break;	
+				}
+				preIndex = index;
+			}
+		});
+		
+	});
+	
+	function confirmTo(){
+		params.church = $('input[name=church]:checked').val();
+		params.weddingDinner = $('input[name=wedding-dinner]:checked').val();
+		if(params.weddingDinner == "false") {
+			$.fn.fullpage.moveTo(7);
+		} else {
+			$.fn.fullpage.moveTo(6);
+		}
+		
+	}
+	
+	function submitTo(){
+	
+		params.name = $('#name').val();
+		params.phone = $('#phone').val();
+		params.friendBelongs=$('input[name=friend-belongs]:checked').val();
+		params.address = $('#address').val();
+		params.church = $('input[name=church]:checked').val();
+		params.weddingDinner = $('input[name=wedding-dinner]:checked').val();
+		params.numberOfParticipants = $('input[name=number-of-participants]:checked').val();
+		params.childSeats = $('input[name=child-seats]:checked').val();
+		console.log(params);
+		$.get("https://script.google.com/macros/s/AKfycbyo3xu8-NLPOJQQKQTp36RmyGOMdAzm0KXXfrxTN1Z6lXHndiWh/exec", params, function (data) {
+
+			
+// 	          alert(data);
+			$('#thanks').show();
+	  		  	$('#postInfo').hide();
+				init();
+	          setHighNumCircles();
+	          setGravity();
+	          setFade();
+ 				
+	         
+		});
+		
+	}
+</script>
+
+</head>
+
+<body>
+
+
+	<div id="fullpage">
+		<div class="section" id="section1">
+			<div class="row ">
+				<div class="col-xs-12 col-sm-6 col-lg-8">
+	<!-- 				<img src="img/w1.png" alt="Image description." id="section_1" /> -->
+	<!-- 				<object class="center" type="image/svg+xml" id="title" data="svg/title.svg" ></object> -->
+					<div id="title" class="center" >
+					</div>
+					<script type="text/javascript">
+						$( "#title" ).load( "svg/title2.svg" );
+					</script>
+				</div>
+			</div>
+
+		</div>
+		<div class="section" id="section2">
+			
+<!-- 			<div class="row"> -->
+<!-- 			    <div class="col-xs-2 col-sm-2 col-lg-2 col-centered"> -->
+			    	
+<!-- 					<div id="svgAttributes">  -->
+<!-- 						<svg width="128" height="128" viewBox="0 0 128 128"> -->
+<!-- 					  		<polygon points="64 69.32220678462356 8.574 99.95402919241081 62.815372461491506 67.26994039630445 64 3.954029192410811 65.1846275385085 67.26994039630445 119.426 99.95402919241081" fill="currentColor"></polygon> -->
+<!-- 							<text x="20" y="70" font-family="Verdana" font-size="35" fill="blue">Hello</text> -->
+<!-- 						</svg>  -->
+<!-- 					</div> -->
+<!-- 			    </div> -->
+<!-- 			</div> -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+					<h1 class="text-center">
+						<span style="color:red">❤</span>文舜&丞君的婚宴邀請函<span style="color:red">❤</span>
+					</h1>
+					<h2 class="text-center">
+						時間：2017/8/19 星期六 18:00<br/>
+						地點：板橋囍宴軒<br/>
+						(新北市板橋區縣民大道二段3號9樓，麗寶百貨樓上)<br/>
+						各位親朋好友，希望有榮幸能邀請您來參加我們的婚禮唷~<br/>
+						再煩請大家花一點小時間回覆喔!!
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-4 col-lg-4">
+					<img src="svg/bridegroom.svg" alt="Image description." id="bridegroom" />
+				</div>
+				<div class="col-xs-4 col-sm-4 col-lg-4 ">
+					<img width="50" src="img/ring.png" id="ring" class="img-responsive center-block" />
+				</div>
+				<div class="col-xs-3 col-sm-3 col-lg-3">
+					<img src="svg/bride.svg" alt="Image description." id="bride" />
+				</div>
+			</div>
+		</div>
+		<div class="section" id="section3">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+				    <h1 class="text-center">請問您是?</h1> 
+				</div>
+				<div class="col-xs-4 col-sm-4 col-lg-4 text-center"></div>
+				<div class="col-xs-4 col-sm-4 col-lg-4 text-center">
+				    <input type="text" class="form-control input-lg" id="name" placeholder="姓名(是全名哦!)" >
+				</div>
+			</div>
+			<div class="row" style="height:50px;"></div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+				    <h1>H!&nbsp;<span specific-name></span>請問您是文舜還是丞君的朋友啊?</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+					<div class="btn-group " data-toggle="buttons">
+						<label class="btn btn-outline-warning " id="hannibal">
+							    <input type="radio" name="friend-belongs"  autocomplete="off" value="hannibal"/>文舜
+						</label>
+						<label class="btn btn-outline-warning" id="annie" >
+							    <input type="radio" name="friend-belongs" autocomplete="off" value="annie"/>丞君
+						</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="section" id="section4">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+				    <h1>Hi&nbsp;<span specific-name></span>!請問您8月19日 18:00 是否願意出席晚宴呢??</h1>
+				    <h2>新北市板橋區縣民大道二段3號9樓(捷運板橋站1號出口)</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-lg btn-outline-info">
+							<input type="radio" name="wedding-dinner" autocomplete="off" value="true"/>當然要，我等很久了耶!
+						</label>
+						<label class="btn btn-lg btn-outline-danger">
+							<input type="radio" name="wedding-dinner" autocomplete="off" value="false"/>謝謝邀請，我祝福的心與你們同在~
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center" style="height:150px;">&nbsp;</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+				    <h1><span specific-name></span>您是否有興趣於8月19日 14:00 參加教會證婚儀式呢?</h1>
+				    <h2>新北市新店區中央路三街15號(捷運小碧潭站2號出口)</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-lg btn-outline-info">
+							<input type="radio" name="church" autocomplete="off" value="true"/>當然要，我等很久了!
+						</label>
+						<label class="btn btn-lg btn-outline-danger">
+							<input type="radio" name="church" autocomplete="off" value="false"/>謝謝邀請，我祝福的心與你們同在~
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center" style="height:50px;">&nbsp;</div>
+			</div>
+		</div>
+		
+		<div class="section" id="section5">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 ">
+				    <h1 class="text-center">麻煩<span specific-name></span>您留下您的聯絡方式吧!</h1>
+				</div>
+			</div>
+<!-- 			<div class="row" style="height:50px;"></div> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-xs-4 col-sm-4 col-lg-4"> -->
+<!--     				<h2 class="text-right">姓名</h2> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-xs-4 col-sm-4 col-lg-4"> -->
+<!--     				<input type="text" class="form-control input-lg" id="name" aria-describedby="emailHelp" placeholder="姓名(是全名哦!)" > -->
+<!-- 				</div> -->
+				
+<!-- 			</div> -->
+			<div class="row" style="height:50px;"></div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-4 col-lg-4">
+    				<h2 class="text-right">電話</h2>
+				</div>
+				<div class="col-xs-4 col-sm-4 col-lg-4">
+    				<input type="number" class="form-control input-lg" id="phone" aria-describedby="emailHelp" placeholder="手機" >
+				</div>
+			</div>
+			<div class="row" style="height:50px;"></div>
+			<div class="row">
+				<div class="col-xs-4 col-sm-4 col-lg-4">
+    				<h2 class="text-right">地址</h2>
+				</div>
+				<div class="col-xs-4 col-sm-4 col-lg-4">
+    				<input type="text" class="form-control input-lg" id="address" aria-describedby="emailHelp" placeholder="喜帖寄送地址(記得填郵遞區號)" >
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="section" id="section6">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+				    <h1 class="text-center">請問<span specific-name></span>當天出席總人數是?(不含兒童座椅)</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+					
+					<div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-lg btn-outline-warning" >
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="1"/>一
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="2"/>二
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="3"/>三
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="4"/>四
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="5"/>五
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning" >
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="6"/>六
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="7"/>七
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="8"/>八
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="9"/>九
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="number-of-participants" autocomplete="off" value="10"/>十
+					  </label>
+					</div>
+				
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center" style="height:200px;">&nbsp;</div>
+			</div>
+			
+			
+			<div class="row" >
+				<div class="col-xs-12 col-sm-12 col-lg-12">
+				    <h1 class="text-center">請問<span specific-name></span>若需要準備兒童座椅的話要幾張呢?</h1>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+					
+					<div class="btn-group" data-toggle="buttons">
+					  <label class="btn btn-lg btn-outline-warning" >
+					    <input type="radio" name="child-seats" autocomplete="off" value="1"/>一
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="2"/>二
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="3"/>三
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="4"/>四
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="5"/>五
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning" >
+					    <input type="radio" name="child-seats" autocomplete="off" value="6"/>六
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="7"/>七
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="8"/>八
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="9"/>九
+					  </label>
+					  <label class="btn btn-lg btn-outline-warning">
+					    <input type="radio" name="child-seats" autocomplete="off" value="10"/>十
+					  </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="section" id="section7">
+			<div class="row" id="thanks">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+			
+					<canvas id="born_canvas" width="640" height="480">Missing the canvas </canvas>
+					<div id="hidden_canvas" >
+				  		<canvas id="born_canvas_hidden" width="100" height="100" style="display:none"></canvas>
+				  	</div>
+					<canvas width="100" height="100" id="txtCanvas" style="background-color: '#000'; display:none;"></canvas>
+				</div>
+			</div>
+			<div class="row" id="postInfo">
+				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
+				    <button type="button" class="btn btn-lg btn-outline-primary" style="font-size: 30px;" onclick="submitTo();">送出</button>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+</html>
