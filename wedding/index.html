@@ -463,55 +463,37 @@ label[validate] {
 	
 	function submitTo(){
 		isSubmited = true;
-			console.log(params);
-			if (validate()) {
-				var $this = $('#submitTo');
-				$this.button('loading');
-				$.ajax({
-				  	data : params,
-				  	dataType: 'json',
-				  	method : 'GET',
-				  	url:'https://script.google.com/macros/s/AKfycbyo3xu8-NLPOJQQKQTp36RmyGOMdAzm0KXXfrxTN1Z6lXHndiWh/exec',
-				  	success : function(data, textStatus, jqXHR ) {
-				  		if(data == true || data == "true"){
-							  $this.button('reset');
-							  $('#thanks').show();
-					  		  $('#postInfo').hide();
-					  		  init();
-					          setHighNumCircles();
-					          setGravity();
-					          setFade();
-					          
-// 					          $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=2');
-// 					          isScale = true;
-						} else {
-							
-						}
-					},
-					error : function(jqXHR,textStatus,errorThrown){
-						alert('an error has occured!');
+		console.log(params);
+		if (validate()) {
+			$('#submitTo').button('loading');
+			$.ajax({
+			  	data : params,
+			  	dataType: 'json',
+			  	method : 'GET',
+			  	url:'https://script.google.com/macros/s/AKfycbyo3xu8-NLPOJQQKQTp36RmyGOMdAzm0KXXfrxTN1Z6lXHndiWh/exec',
+			  	success : function(data, textStatus, jqXHR ) {
+			  		if(data == true || data == "true"){
+						  show();
+					} else {
+						alert('an error has occured');
+						$('#submitTo').button('reset');
 					}
-				});
-			}
-			
-			
-// 			
-// 			$.get("https://script.google.com/macros/s/AKfycbyo3xu8-NLPOJQQKQTp36RmyGOMdAzm0KXXfrxTN1Z6lXHndiWh/exec", params, function (data) {
-
-				
-// 				if(data == "true"){
-// 					  $this.button('reset');
-// 					  $('#thanks').show();
-// 			  		  $('#postInfo').hide();
-// 			  		  init();
-// 			          setHighNumCircles();
-// 			          setGravity();
-// 			          setFade();
-// 				} else {
-					
-// 				}
-				 
-// 			});
+				},
+				error : function(jqXHR,textStatus,errorThrown){
+					show();
+				}
+			});
+		}
+	}
+	
+	function show() {
+		$('#submitTo').button('reset');
+		$('#thanks').show();
+		$('#postInfo').hide();
+		init();
+		setHighNumCircles();
+		setGravity();
+		setFade();
 	}
 
 	
@@ -586,7 +568,7 @@ label[validate] {
 			<div class="row" style="height:50px;"></div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
-				    <h1>H!&nbsp;<span specific-name></span>請問您是文舜還是丞君的朋友啊?</h1>
+				    <h1>Hi!&nbsp;<span specific-name></span>請問您是文舜還是丞君的朋友啊?</h1>
 				</div>
 			</div>
 			<div class="row">
