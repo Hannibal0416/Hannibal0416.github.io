@@ -353,8 +353,6 @@ label[validate] {
 			}
 		});
 		
-		
-		
 	});
 
 	function validate() {
@@ -487,6 +485,13 @@ label[validate] {
 	}
 	
 	function show() {
+		
+		if(params.weddingDinner == "true" || params.church == 'true') {
+			arr_Msg =  sname + '我們八月十九日見！感謝您！';
+		} else {
+			arr_Msg =  sname + '您的資料我們收到了！感謝您！';
+		}
+		
 		$('#submitTo').button('reset');
 		$('#thanks').show();
 		$('#postInfo').hide();
@@ -667,7 +672,7 @@ label[validate] {
 		<div class="section" id="section6">
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-lg-12">
-				    <h1 class="text-center">請問<span specific-name></span>當天出席總人數是?(不含兒童座椅)</h1>
+				    <h1 class="text-center"><span specific-name></span>您當天出席總人數是?(不含兒童座椅)</h1>
 				</div>
 			</div>
 			<div class="row">
@@ -711,7 +716,7 @@ label[validate] {
 			
 			<div class="row" >
 				<div class="col-xs-12 col-sm-12 col-lg-12">
-				    <h1 class="text-center">請問<span specific-name></span>若需要準備兒童座椅的話要幾張呢?</h1>
+				    <h1 class="text-center"><span specific-name></span>您若需要準備兒童座椅的話要幾張呢?</h1>
 				</div>
 			</div>
 			<div class="row">
@@ -756,7 +761,7 @@ label[validate] {
 			<div id="postInfo">
 				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-lg-12 text-center">
-						<h1>請問<span specific-name></span>您有什麼話想對我們說呢?</h1>
+						<h1><span specific-name></span>您有什麼話想對我們說呢?</h1>
 					</div>
 				</div>
 				<div class="row">
