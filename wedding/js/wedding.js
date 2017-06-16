@@ -47,7 +47,6 @@ var animeInput = {
 	loop : false
 };
 
-<<<<<<< HEAD
 var images = new Array()
 function preload() {
 	for (i = 0; i < preload.arguments.length; i++) {
@@ -60,8 +59,6 @@ preload(
 	"img/hannibal.png"
 )
 
-=======
->>>>>>> origin/master
 $(document).ready( function() {
 	$.getJSON('//gd.geobytes.com/GetCityDetails?callback=?', function(data) {
 		params.ip = data.geobytesipaddress;
@@ -240,11 +237,6 @@ $(document).ready( function() {
 //				fadingEffect: true,
 // 				scrollOverflowReset: false,
 // 			scrollBar: true,
-<<<<<<< HEAD
-=======
-		parallax:true,
-		parallaxKey: 'YWx2YXJvdHJpZ28uY29tXzlNZGNHRnlZV3hzWVhnPTFyRQ==',
->>>>>>> origin/master
 		verticalCentered: true,
 		navigation: false,
 		menu: '#menu',
