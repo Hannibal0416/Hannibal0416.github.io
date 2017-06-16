@@ -59,10 +59,11 @@ preload(
 	"img/hannibal.png"
 )
 
+function getIP(json) {
+	params.ip = json.ip;
+}
+
 $(document).ready( function() {
-//	$.get( "//gd.geobytes.com/GetCityDetails?callback=?", function( data ) {
-//		params.ip = data.geobytesipaddress;
-//	});
 	
 // 		$('input, textarea').blur(function(event) {
 // 		    $('meta[name=viewport]').attr('content', 'width=device-width, initial-scale=0.5');
