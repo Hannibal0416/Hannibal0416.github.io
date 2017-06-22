@@ -220,6 +220,11 @@ $(document).ready(function() {
 		transition(fromZhonghe[progress],fromZhonghe[++progress],markers.car,fromZhonghe);
 	});
 
+	$('#info').click(function(){
+		infowindow.setContent(info.dinner);
+		infowindow.open(map, markers.dinner);
+	});
+
 	function changeIcon(lat,lng,marker){
 // 		if
 		//右
@@ -305,6 +310,7 @@ $(document).ready(function() {
 			<div class="dummy__item" id="fromTucheng">開車:從土城</div>
 			<div class="dummy__item" id="from64">開車:從64</div>
 			<div class="dummy__item" id="fromZhonghe">開車:從中和</div>
+			<div class="dummy__item" id="info">相關資訊</div>
 		</div>
 	</div> 
 	<script type="text/javascript">
