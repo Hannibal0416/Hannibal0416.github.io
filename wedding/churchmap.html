@@ -31,12 +31,12 @@ $(document).ready(function() {
 		width=50;
 		showImg=50;
 		carWidth=30
-		zoom = 17;
+		zoom = 16;
 	} else {
 		carWidth = 50
 		width=60;
 		showImg=60;
-		zoom = 18;
+		zoom = 17;
 	}
 	
 	var locations = {
@@ -160,6 +160,7 @@ $(document).ready(function() {
     		path.setMap(null);
     		delete path;
     	}
+		infowindow.close();
 		markers.car = new google.maps.Marker({
 // 			position: locations[0],
 			title: "car", 
@@ -211,6 +212,8 @@ $(document).ready(function() {
 	$('#info').click(function(){
 		infowindow.setContent(info.church);
 		infowindow.open(map, markers.church);
+		map.panTo(locations.church);
+		$('#menu-icon-trigger').click();
 	});
 	function changeIcon(lat,lng,marker,locations){
 // 		if
